@@ -23,28 +23,12 @@ class ItemFilter(FilterSet):
         fields = ('uniqueid', 'category', 'subcategory', 'subsubcategory', 'min_cost', 'max_cost', 'min_cost', 'supplier')
 
 
-class CategoryFilter(FilterSet):
-    """Filter for a category"""
+class OrderFilter(FilterSet):
+    """Filter for an order"""
     store = filters.CharFilter('store')
+    start_date = filters.DateFilter(field_name="date", lookup_expr='gte')
+    end_date = filters.DateFilter(field_name="date", lookup_expr='lte')
 
     class Meta:
-        models = models.Category
-        fields = ('store',)
-
-
-class SubCategoryFilter(FilterSet):
-    """Filter for a subcategory"""
-    category = filters.CharFilter('category')
-
-    class Meta:
-        models = models.SubCategory
-        fields = ('category',)
-
-
-class SubSubCategoryFilter(FilterSet):
-    """Filter for a subsubcategory"""
-    subcategory = filters.CharFilter('subcategory')
-
-    class Meta:
-        models = models.SubSubCategory
-        fields = ('subcategory',)
+        models = models.ModelOrder
+        fields = ('store', 'start_date', 'end_date')

@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from core import models
+from django.contrib.auth import get_user_model, authenticate, password_validation
 from django_filters import rest_framework as filters
+User = get_user_model()
+from rest_framework.authtoken.models import Token
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -31,25 +34,35 @@ class GetItemSerializer(serializers.ModelSerializer):
         depth=1
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    """Serializer for category"""
+class CartItemSerializer(serializers.ModelSerializer):
+    """Serializer for cart items"""
     class Meta:
-        model = models.Category
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon', 'store')
+        model = models.CartItems
+        fields = (
+            'id', 'item', 'quantity'
+        )
         read_only_fields = ('id',)
 
 
-class SubCategorySerializer(serializers.ModelSerializer):
-    """Serializer for subcategory"""
+class ClientOrderSerializer(serializers.ModelSerializer):
+    """Serializer for client order"""
+    items = CartItemSerializer(many=True, required=False, allow_null=True)
 
     class Meta:
-        model = models.SubCategory
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'category')
+        model = models.ModelOrder
+        fields = (
+            'id', 'items', "store", "totalCost", "user", 'address', 'phone', 'lat', 'lon',
+            'comment', 'storeName', 'storeLogo', 'status', 'date',
+        )
+        read_only_fields = ('id',)
 
 
-class SubSubCategorySerializer(serializers.ModelSerializer):
-    """Serializer for subsubcategory"""
+    def create(self, validated_data):
 
-    class Meta:
-        model = models.SubSubCategory
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'subcategory')
+        items = validated_data.pop("items", None)
+        order = models.ModelOrder.objects.create(**validated_data)
+
+        if items:
+            for i in items:
+                models.CartItems.objects.create(order=order, **i)
+        return order

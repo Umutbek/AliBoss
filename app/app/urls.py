@@ -44,7 +44,9 @@ swagger_urlpatterns = [
 
 urlpatterns = [
    path('admin/', admin.site.urls),
-   path('core/', include('core.urls')),
+   path('api/core/', include('core.urls')),
+   path('api/', include('category.urls')),
+
    path('', include(swagger_urlpatterns)),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

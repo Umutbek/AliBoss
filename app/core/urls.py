@@ -4,15 +4,14 @@ from .views import *
 from rest_framework.routers import SimpleRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 
-app_name = 'item'
+app_name = 'core'
 
 router = SimpleRouter()
 
 router.register(r'item', views.ItemViewSet)
-router.register(r'category', views.CategoryViewSet)
-router.register(r'subcategory', views.SubCategoryViewSet)
-router.register(r'subsubcategory', views.SubSubCategoryViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path("order/", views.OrderView.as_view())
+
 ]
