@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, \
 
 from django_fsm import FSMIntegerField
 import requests
-from core import imggenerate, utils
+from core import imggenerate, utils, firestore
 from category.models import Category, SubCategory, SubSubCategory, User
 
 
@@ -17,7 +17,8 @@ class Item(models.Model):
     subcategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Сабкатегория товара")
     subsubcategory = models.ForeignKey(SubSubCategory, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Субподкатегория товара")
     cost = models.FloatField(default=0, verbose_name="Цена товара")
-    costsale = models.FloatField(default=0, verbose_name="Акционная цена товара")
+    costSale = models.FloatField(default=0, verbose_name="Акционная цена товара")
+    issale = models.BooleanField(default=False)
     supplier = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Магазин")
     uniqueid = models.CharField(max_length=200, null=True, blank=True, verbose_name="Штрихкод")
     image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
@@ -61,6 +62,16 @@ class ModelOrder(models.Model):
     def __str__(self):
         return self.phone
 
+    def save(self, *args, **kwargs):
+
+        try:
+            firestore.db.collection(u'orders').document(str(self.id)).update(
+                {"status": self.status})
+        except:
+            pass
+
+
+        super(ModelOrder, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = ("Заказ")

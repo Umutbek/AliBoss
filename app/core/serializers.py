@@ -12,7 +12,7 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Item
         fields = (
-            'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost',
+            'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost', 'costSale', 'issale',
             'supplier', 'uniqueid', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
             'likes', 'views', 'imagelink'
             )
@@ -26,8 +26,8 @@ class GetItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Item
         fields = (
-            'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost',
-            'supplier', 'uniqueid', 'image', 'phone', 'imagelink'
+            'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory',
+            'cost', 'costSale', 'issale', 'supplier', 'uniqueid', 'image', 'phone', 'imagelink'
             )
 
         read_only_fields = ('id',)

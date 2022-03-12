@@ -14,7 +14,7 @@ class ItemFilter(FilterSet):
 
     supplier = filters.CharFilter('supplier')
     uniqueid = filters.CharFilter('uniqueid')
-
+    issale = filters.CharFilter('issale')
     min_cost= filters.CharFilter(field_name="cost",lookup_expr='gte')
     max_cost= filters.CharFilter(field_name="cost",lookup_expr='lte')
 

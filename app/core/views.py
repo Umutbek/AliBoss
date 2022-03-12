@@ -2,7 +2,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status, permissions, generics
 from django.shortcuts import redirect
-from core import models, serializers, filters
+from core import models, serializers, filters, functions
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,15 +48,9 @@ class OrderView(generics.ListCreateAPIView):
     def get_queryset(self):
         return self.queryset.all().order_by("-id")
 
-    # def create(self, request, *args, **kwargs):
-    #     serializer = serializers.ClientOrderSerializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     saved_data = serializer.save()
-    #     functions.create_order_in_firebase(saved_data)
-    #     if saved_data.cart:
-    #         cart = models.ModelCart.objects.get(id=saved_data.cart.id)
-    #         if cart:
-    #             for i in cart.listitem.all():
-    #                 i.delete()
-    #             cart.delete()
-    #     return Response(serializer.data)
+    def create(self, request, *args, **kwargs):
+        serializer = serializers.ClientOrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        saved_data = serializer.save()
+        functions.create_order_in_firebase(saved_data)
+        return Response(serializer.data)
