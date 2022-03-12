@@ -21,6 +21,8 @@ class Item(models.Model):
     supplier = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Магазин")
     uniqueid = models.CharField(max_length=200, null=True, blank=True, verbose_name="Штрихкод")
     image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
+    imagelink = models.TextField(null=True, blank=True, verbose_name="Линк фото товара")
+
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
     instagram = models.CharField(max_length=200, null=True, blank=True, verbose_name="Инстаграм")
     facebook = models.CharField(max_length=200, null=True, blank=True, verbose_name="Фейсбук")
