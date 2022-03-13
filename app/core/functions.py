@@ -10,8 +10,8 @@ def create_order_in_firebase(saved_data):
             {
                 'item': {
                     'name': i.item.name, 'description': i.item.description,
-                    'category': i.item.category, 'subcategory': i.item.subcategory,
-                    'subsubcategory': i.item.subsubcategory, 'cost': i.item.cost,
+                    'category': str(i.item.category), 'subcategory': str(i.item.subcategory),
+                    'subsubcategory': str(i.item.subsubcategory), 'cost': i.item.cost,
                     'costSale': i.item.costSale, 'issale': i.item.issale,
                     'supplier': i.item.supplier.id, 'uniqueid': i.item.uniqueid,
                     'imagelink': i.item.imagelink, 'image': str(i.item.image),
@@ -22,7 +22,6 @@ def create_order_in_firebase(saved_data):
                 'quantity': i.quantity
             }
         )
-
 
     data = {
         u'id': saved_data.id, u'store': saved_data.store, u'totalCost': saved_data.totalCost,
