@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, \
 from django_fsm import FSMIntegerField
 import requests
 from core import imggenerate, utils, firestore
-from category.models import Category, SubCategory, SubSubCategory, User
+from category.models import Category, SubCategory, SubSubCategory, User, Store
 
 
 class Item(models.Model):
@@ -19,7 +19,7 @@ class Item(models.Model):
     cost = models.FloatField(default=0, verbose_name="Цена товара")
     costSale = models.FloatField(default=0, verbose_name="Акционная цена товара")
     issale = models.BooleanField(default=False)
-    supplier = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Магазин")
+    supplier = models.ForeignKey(Store, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Магазин")
     uniqueid = models.CharField(max_length=200, null=True, blank=True, verbose_name="Штрихкод")
     image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     imagelink = models.TextField(null=True, blank=True, verbose_name="Линк фото товара")

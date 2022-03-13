@@ -31,9 +31,23 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Model for user"""
-
     name = models.CharField(max_length=200, verbose_name="Название магазина")
     login = models.CharField(max_length=200, unique=True, verbose_name="Логин")
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'login'
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = ("Пользователь")
+        verbose_name_plural = ("Пользователи")
+
+
+class Store(User):
+    """Model for user"""
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
     avatar = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     email = models.EmailField(max_length=200, null=True, blank=True, verbose_name="Почта")
@@ -41,15 +55,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     location = models.CharField(max_length=200, null=True, blank=True)
     slogan = models.CharField(max_length=200, null=True, blank=True, verbose_name="Слоган")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
+    instagram = models.CharField(max_length=200, null=True, blank=True, verbose_name="Инстаграм")
+    facebook = models.CharField(max_length=200, null=True, blank=True, verbose_name="Фейсбук")
+    whatsapp = models.CharField(max_length=200, null=True, blank=True, verbose_name="Ватсап")
+    web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'login'
 
     class Meta:
         ordering = ('-id',)
@@ -63,12 +75,13 @@ class Category(models.Model):
     nameRus = models.CharField(max_length=200, null=True)
     nameKg = models.CharField(max_length=200, null=True)
     icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
-    store = models.ManyToManyField('User', blank=True)
+    store = models.ManyToManyField('Store', blank=True)
 
     def __str__(self):
         return self.nameRus
 
     class Meta:
+        ordering = ('id',)
         verbose_name = ("Категория")
         verbose_name_plural = ("Категории")
 

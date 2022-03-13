@@ -10,9 +10,10 @@ class StoreSerializer(serializers.ModelSerializer):
     """Serializer for stores"""
 
     class Meta:
-        model = User
+        model = models.Store
         fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address',
-                  'location', 'longitude', 'latitude', 'slogan', 'description', 'rating', )
+                  'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
+                  'slogan', 'description', 'rating', )
 
 
 class LoginSerializer(serializers.Serializer):

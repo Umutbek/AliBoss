@@ -20,7 +20,7 @@ import requests
 class StoreViewSet(viewsets.ModelViewSet):
     """Manage Store"""
     permission_classes = (permissions.AllowAny,)
-    queryset = models.User.objects.all()
+    queryset = models.Store.objects.all()
     serializer_class = serializers.StoreSerializer
 
     filter_backends = (SearchFilter,)
