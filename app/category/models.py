@@ -97,7 +97,7 @@ class SubCategory(models.Model):
         return self.nameRus
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('id',)
         verbose_name = ("Субкатегория")
         verbose_name_plural = ("Субгатегории")
 
@@ -113,6 +113,6 @@ class SubSubCategory(models.Model):
         return self.nameRus
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('id',)
         verbose_name = ("Субподкатегория")
         verbose_name_plural = ("Субподгатегории")
