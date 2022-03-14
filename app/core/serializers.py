@@ -66,3 +66,29 @@ class ClientOrderSerializer(serializers.ModelSerializer):
             for i in items:
                 models.CartItems.objects.create(order=order, **i)
         return order
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    """Serializer for Services"""
+
+    class Meta:
+        model = models.Services
+        fields = (
+            'id', 'name', 'description', 'cost', 'costSale', 'issale',
+            'supplier', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
+            'likes', 'views', 'imagelink'
+            )
+
+        read_only_fields = ('id',)
+
+
+class BannerSerializer(serializers.ModelSerializer):
+    """Serializer for Banner"""
+
+    class Meta:
+        model = models.Banner
+        fields = (
+            'id', 'photo', 'link', 'color'
+            )
+
+        read_only_fields = ('id',)

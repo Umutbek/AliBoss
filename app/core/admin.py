@@ -24,6 +24,9 @@ class ModelOrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Item)
+admin.site.register(models.Services)
+admin.site.register(models.Banner)
+
 admin.site.register(models.ModelOrder, ModelOrderAdmin)
 admin.site.unregister(Group)
 admin.site.unregister(TokenProxy)

@@ -9,9 +9,10 @@ app_name = 'core'
 router = SimpleRouter()
 
 router.register(r'item', views.ItemViewSet)
+router.register(r'services', views.ServiceViewSet)
+router.register(r'banner', views.BannerViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path("order/", views.OrderView.as_view())
-
 ]

@@ -38,6 +38,26 @@ class ItemViewSet(viewsets.ModelViewSet):
         return serializers.ItemSerializer
 
 
+
+class ServiceViewSet(viewsets.ModelViewSet):
+    """Manage services"""
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.Services.objects.all()
+    serializer_class = serializers.ServiceSerializer
+
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name',)
+
+
+class BannerViewSet(viewsets.ModelViewSet):
+    """Manage banners"""
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.Banner.objects.all()
+    serializer_class = serializers.BannerSerializer
+
+
 class OrderView(generics.ListCreateAPIView):
     """API view for client order list"""
     queryset = models.ModelOrder.objects.all()

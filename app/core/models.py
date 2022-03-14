@@ -47,8 +47,8 @@ class ModelOrder(models.Model):
     user = models.CharField(max_length=200, null=True, blank=True, verbose_name="Пользователь")
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name="Адресс")
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
-    lat = models.CharField(max_length=200, null=True, blank=True)
-    lon = models.CharField(max_length=200, null=True, blank=True)
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
     comment = models.CharField(max_length=200, null=True, blank=True, verbose_name="Комментарии")
     storeName = models.CharField(max_length=200, null=True, blank=True, verbose_name="Название магазина")
     storeLogo = models.CharField(max_length=200, null=True, blank=True, verbose_name="Лого магазина")
@@ -90,3 +90,40 @@ class CartItems(models.Model):
     class Meta:
         verbose_name = ("Товар")
         verbose_name_plural = ("Товары")
+
+
+class Services(models.Model):
+    """Model for services"""
+    name = models.CharField(max_length=500, verbose_name="Название услуги")
+    description = models.TextField(null=True, blank=True, verbose_name="Описание услуги")
+    cost = models.FloatField(default=0, verbose_name="Цена услуги")
+    costSale = models.FloatField(default=0, verbose_name="Акционная цена услуги")
+    issale = models.BooleanField(default=False)
+    supplier = models.CharField(max_length=500, null=True, blank=True, verbose_name="Магазин")
+    image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
+    imagelink = models.TextField(null=True, blank=True, verbose_name="Линк фото товара")
+    phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
+    instagram = models.CharField(max_length=200, null=True, blank=True, verbose_name="Инстаграм")
+    facebook = models.CharField(max_length=200, null=True, blank=True, verbose_name="Фейсбук")
+    whatsapp = models.CharField(max_length=200, null=True, blank=True, verbose_name="Ватсап")
+    web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
+    likes = models.IntegerField(default=0, verbose_name="Число лайков")
+    views = models.IntegerField(default=0, verbose_name="Число просмотров")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = ("Услуга")
+        verbose_name_plural = ("Услуги")
+
+
+class Banner(models.Model):
+    """Model for banner advertisements"""
+    photo = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото банерной рекламы")
+    link = models.CharField(max_length=200, null=True, blank=True, verbose_name="Линк")
+    color = models.CharField(max_length=200, null=True, blank=True, verbose_name="Цвет")
+
+    class Meta:
+        verbose_name = ("Банерная реклама")
+        verbose_name_plural = ("Банерные рекламы")
