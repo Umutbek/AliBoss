@@ -31,8 +31,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Model for user"""
-    name = models.CharField(max_length=200, verbose_name="Название магазина")
+    name = models.CharField(max_length=200, verbose_name="Название")
     login = models.CharField(max_length=200, unique=True, verbose_name="Логин")
+    address = models.CharField(max_length=200, null=True, verbose_name="Адресс")
+    phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
+
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -46,12 +49,30 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = ("Пользователи")
 
 
+class RegularAccount(User):
+    """Model for regular account"""
+    uid = models.CharField(max_length=200, unique=True, verbose_name="Код пользователя")
+    isoptovik = models.BooleanField(default=False)
+    optovik_start_date = models.DateTimeField(null=True, blank=True)
+    optovik_end_date = models.DateTimeField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+
+        if self.uid:
+            user = RegularAccount.objects.filter(uid=self.uid)
+            if user:
+                if self.isoptovik is True and self.optovik_end_date is not None:
+                    if str(self.optovik_end_date) < str(datetime.datetime.now()):
+                        self.isoptovik = False
+
+
+        super(RegularAccount, self).save(*args, **kwargs)
+
+
 class Store(User):
     """Model for user"""
-    phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
     avatar = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     email = models.EmailField(max_length=200, null=True, blank=True, verbose_name="Почта")
-    address = models.CharField(max_length=200, null=True, verbose_name="Адресс")
     location = models.CharField(max_length=200, null=True, blank=True)
     slogan = models.CharField(max_length=200, null=True, blank=True, verbose_name="Слоган")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")

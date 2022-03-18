@@ -16,6 +16,24 @@ class StoreSerializer(serializers.ModelSerializer):
                   'slogan', 'description', 'rating', )
 
 
+class RegularAccountSerializer(serializers.ModelSerializer):
+    """Serializer for regular account"""
+
+    class Meta:
+        model = models.RegularAccount
+        fields = ('id', 'name', 'login', 'phone', 'address',
+                  'uid', 'isoptovik', 'optovik_start_date', 'optovik_end_date', 'password')
+
+        extra_kwargs = {'password':{'write_only':True},}
+
+    def create(self, validated_data):
+        """Create user with encrypted password and return it"""
+        user = models.RegularAccount.objects.create_user(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
 class LoginSerializer(serializers.Serializer):
     """Serializer for login"""
     login = serializers.CharField()

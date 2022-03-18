@@ -23,7 +23,6 @@ class Item(models.Model):
     uniqueid = models.CharField(max_length=200, null=True, blank=True, verbose_name="Штрихкод")
     image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     imagelink = models.TextField(null=True, blank=True, verbose_name="Линк фото товара")
-
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
     instagram = models.CharField(max_length=200, null=True, blank=True, verbose_name="Инстаграм")
     facebook = models.CharField(max_length=200, null=True, blank=True, verbose_name="Фейсбук")
@@ -31,6 +30,8 @@ class Item(models.Model):
     web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
     likes = models.IntegerField(default=0, verbose_name="Число лайков")
     views = models.IntegerField(default=0, verbose_name="Число просмотров")
+    isoptovik = models.BooleanField(default=False, verbose_name="Оптовый товар")
+    optovikcost = models.FloatField(default=0, verbose_name="Оптовая цена товара")
 
     def __str__(self):
         return self.name
@@ -69,7 +70,6 @@ class ModelOrder(models.Model):
                 {"status": self.status})
         except:
             pass
-
 
         super(ModelOrder, self).save(*args, **kwargs)
 

@@ -31,6 +31,7 @@ class UserAdmin(BaseUserAdmin):
 
 # admin.site.register(models.User)
 admin.site.register(models.Store, UserAdmin)
+admin.site.register(models.RegularAccount)
 
 admin.site.register(models.Category)
 admin.site.register(models.SubCategory)

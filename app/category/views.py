@@ -1,6 +1,6 @@
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import viewsets, mixins, status, permissions, generics
+from rest_framework import viewsets, mixins, status, permissions, generics, authentication
 from django.shortcuts import redirect
 from category import models, serializers, filters
 from django.views.generic import TemplateView
@@ -26,6 +26,25 @@ class StoreViewSet(viewsets.ModelViewSet):
     filter_backends = (SearchFilter,)
     search_fields = ('name', 'description', 'slogan')
     pagination_class = None
+
+
+class RegularAccountViewSet(viewsets.ModelViewSet):
+    """Manage Regular Accounts"""
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.RegularAccount.objects.all()
+    serializer_class = serializers.RegularAccountSerializer
+    pagination_class = None
+
+
+class GetMeView(generics.RetrieveUpdateAPIView):
+    """Manage the authenticated user"""
+    serializer_class = serializers.StoreSerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self):
+        """Retrieve and return authentication user"""
+        return self.request.user
 
 
 class LoginAPI(APIView):
