@@ -91,6 +91,8 @@ class Category(models.Model):
     nameEn = models.CharField(max_length=200, null=True)
     nameRus = models.CharField(max_length=200, null=True)
     nameKg = models.CharField(max_length=200, null=True)
+    isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
+
     icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     store = models.ManyToManyField('Store', blank=True)
 

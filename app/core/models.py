@@ -55,6 +55,7 @@ class ModelOrder(models.Model):
     storeLogo = models.CharField(max_length=200, null=True, blank=True, verbose_name="Лого магазина")
     status = FSMIntegerField(choices=utils.OrderStatuses.choices, default=utils.OrderStatuses.New, verbose_name="Статус")
     date = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Дата")
+    isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
 
     @property
     def items(self):

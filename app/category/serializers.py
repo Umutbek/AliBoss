@@ -76,14 +76,16 @@ class LoginSerializer(serializers.Serializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for category"""
+    id = serializers.IntegerField()
+
     class Meta:
         model = models.Category
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon', 'store')
-        read_only_fields = ('id',)
+        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon', 'store', 'isoptovik')
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
     """Serializer for subcategory"""
+    id = serializers.IntegerField()
 
     class Meta:
         model = models.SubCategory
@@ -92,6 +94,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 class SubSubCategorySerializer(serializers.ModelSerializer):
     """Serializer for subsubcategory"""
+    id = serializers.IntegerField()
 
     class Meta:
         model = models.SubSubCategory

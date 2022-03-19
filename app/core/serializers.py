@@ -14,7 +14,7 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost', 'costSale', 'issale',
             'supplier', 'uniqueid', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
-            'likes', 'views', 'imagelink'
+            'likes', 'views', 'imagelink', 'isoptovik', 'optovikcost'
             )
 
         read_only_fields = ('id',)
@@ -28,7 +28,8 @@ class GetItemSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory',
             'cost', 'costSale', 'issale', 'supplier', 'uniqueid', 'image', 'phone',
-            'imagelink', 'instagram', 'facebook', 'whatsapp', 'web', 'likes', 'views'
+            'imagelink', 'instagram', 'facebook', 'whatsapp', 'web', 'likes', 'views', 'isoptovik',
+            'optovikcost'
             )
 
         read_only_fields = ('id',)
@@ -53,7 +54,7 @@ class ClientOrderSerializer(serializers.ModelSerializer):
         model = models.ModelOrder
         fields = (
             'id', 'items', "store", "totalCost", "user", 'address', 'phone', 'lat', 'lon',
-            'comment', 'storeName', 'storeLogo', 'status', 'date',
+            'comment', 'storeName', 'storeLogo', 'status', 'date', 'isoptovik'
         )
         read_only_fields = ('id',)
 
