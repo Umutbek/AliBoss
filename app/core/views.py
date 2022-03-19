@@ -10,7 +10,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters import FilterSet
 from rest_framework.authtoken.models import Token
 
-
+from django.db.models import Sum, Count, F, Q
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes, action
@@ -38,7 +38,6 @@ class ItemViewSet(viewsets.ModelViewSet):
         return serializers.ItemSerializer
 
 
-
 class ServiceViewSet(viewsets.ModelViewSet):
     """Manage services"""
     authentication_classes = (TokenAuthentication,)
@@ -56,6 +55,8 @@ class BannerViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = models.Banner.objects.all()
     serializer_class = serializers.BannerSerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_class = filters.BannerFilter
 
 
 class OrderView(generics.ListCreateAPIView):

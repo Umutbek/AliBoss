@@ -10,13 +10,11 @@ from category import models
 
 class UserAdmin(BaseUserAdmin):
 
-    def get_queryset(self, request):
-        qs = super(UserAdmin, self).get_queryset(request)
-        qs = qs.filter(is_superuser=False)
-        return qs
-
     ordering = ['id']
     list_display = ('login', 'phone')
+    search_fields = ['login']
+    list_filter = (
+    )
 
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
@@ -29,10 +27,23 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
+
+class RegularUserAdmin(admin.ModelAdmin):
+
+    search_fields = ('name',)
+    list_filter = (
+        ('isoptovik', admin.BooleanFieldListFilter),
+    )
+
+    fieldsets = (
+        (None, {'fields': ('login', 'password')}),
+        (_('Personal info'), {'fields': ('name', 'phone', 'address', 'isoptovik',
+                                         'optovik_start_date', 'optovik_end_date')}),
+    )
+
 # admin.site.register(models.User)
 admin.site.register(models.Store, UserAdmin)
-admin.site.register(models.RegularAccount)
-
+admin.site.register(models.RegularAccount, RegularUserAdmin)
 admin.site.register(models.Category)
 admin.site.register(models.SubCategory)
 admin.site.register(models.SubSubCategory)

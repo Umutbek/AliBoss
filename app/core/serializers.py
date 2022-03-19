@@ -27,7 +27,8 @@ class GetItemSerializer(serializers.ModelSerializer):
         model = models.Item
         fields = (
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory',
-            'cost', 'costSale', 'issale', 'supplier', 'uniqueid', 'image', 'phone', 'imagelink'
+            'cost', 'costSale', 'issale', 'supplier', 'uniqueid', 'image', 'phone',
+            'imagelink', 'instagram', 'facebook', 'whatsapp', 'web', 'likes', 'views'
             )
 
         read_only_fields = ('id',)
@@ -88,7 +89,7 @@ class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Banner
         fields = (
-            'id', 'photo', 'link', 'color'
+            'id', 'photo', 'link', 'color', 'isoptovik'
             )
 
         read_only_fields = ('id',)

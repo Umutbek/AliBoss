@@ -123,6 +123,7 @@ class Banner(models.Model):
     photo = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото банерной рекламы")
     link = models.CharField(max_length=200, null=True, blank=True, verbose_name="Линк")
     color = models.CharField(max_length=200, null=True, blank=True, verbose_name="Цвет")
+    isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
 
     class Meta:
         verbose_name = ("Банерная реклама")

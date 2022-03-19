@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, \
 
 from django_fsm import FSMIntegerField
 import requests
-from core import imggenerate
+from core import imggenerate, firestore
 
 
 class UserManager(BaseUserManager):
@@ -43,30 +43,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'login'
 
-    class Meta:
-        ordering = ('-id',)
-        verbose_name = ("Пользователь")
-        verbose_name_plural = ("Пользователи")
-
 
 class RegularAccount(User):
     """Model for regular account"""
     uid = models.CharField(max_length=200, unique=True, verbose_name="Код пользователя")
-    isoptovik = models.BooleanField(default=False)
-    optovik_start_date = models.DateTimeField(null=True, blank=True)
-    optovik_end_date = models.DateTimeField(null=True, blank=True)
+    isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
+    optovik_start_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата начала работы оптовика")
+    optovik_end_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата окончания оптовика")
 
     def save(self, *args, **kwargs):
-
-        if self.uid:
-            user = RegularAccount.objects.filter(uid=self.uid)
-            if user:
-                if self.isoptovik is True and self.optovik_end_date is not None:
-                    if str(self.optovik_end_date) < str(datetime.datetime.now()):
-                        self.isoptovik = False
-
+        try:
+            firestore.db.collection(u'users').document(self.uid).update(
+                {"optovik": self.isoptovik})
+        except:
+            pass
 
         super(RegularAccount, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = ("Пользователь")
+        verbose_name_plural = ("Пользователи")
 
 
 class Store(User):

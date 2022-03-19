@@ -15,12 +15,15 @@ class ItemFilter(FilterSet):
     supplier = filters.CharFilter('supplier')
     uniqueid = filters.CharFilter('uniqueid')
     issale = filters.CharFilter('issale')
+    isoptovik = filters.CharFilter('isoptovik')
+
     min_cost= filters.CharFilter(field_name="cost",lookup_expr='gte')
     max_cost= filters.CharFilter(field_name="cost",lookup_expr='lte')
 
     class Meta:
         models = models.Item
-        fields = ('uniqueid', 'category', 'subcategory', 'subsubcategory', 'min_cost', 'max_cost', 'min_cost', 'supplier')
+        fields = ('uniqueid', 'category', 'subcategory', 'subsubcategory', 'min_cost', 'max_cost', 'min_cost',
+                  'isoptovik', 'issale', 'supplier')
 
 
 class OrderFilter(FilterSet):
@@ -32,3 +35,13 @@ class OrderFilter(FilterSet):
     class Meta:
         models = models.ModelOrder
         fields = ('store', 'start_date', 'end_date')
+
+
+
+class BannerFilter(FilterSet):
+    """Filter for banners"""
+    isoptovik = filters.CharFilter('isoptovik')
+
+    class Meta:
+        models = models.Banner
+        fields = ('isoptovik',)

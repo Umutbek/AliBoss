@@ -23,7 +23,15 @@ class ModelOrderAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.Item)
+class ItemAdmin(admin.ModelAdmin):
+
+    search_fields = ('name',)
+    list_filter = (
+        ('isoptovik', admin.BooleanFieldListFilter),
+    )
+
+
+admin.site.register(models.Item, ItemAdmin)
 admin.site.register(models.Services)
 admin.site.register(models.Banner)
 
