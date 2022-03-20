@@ -67,8 +67,10 @@ class ModelOrder(models.Model):
     def save(self, *args, **kwargs):
 
         try:
-            firestore.db.collection(u'orders').document(str(self.id)).update(
-                {"status": self.status})
+            firestore.db.collection(u'stores') \
+                .document(str(self.store)) \
+                .collection(u'orders').document(
+                str(self.id)).update({"status": self.status})
         except:
             pass
 
