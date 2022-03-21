@@ -59,7 +59,7 @@ class BannerViewSet(viewsets.ModelViewSet):
     filter_class = filters.BannerFilter
 
 
-class OrderView(generics.ListCreateAPIView):
+class OrderViewSet(viewsets.ModelViewSet):
     """API view for client order list"""
     queryset = models.ModelOrder.objects.all()
     serializer_class = serializers.ClientOrderSerializer

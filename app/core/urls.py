@@ -11,8 +11,9 @@ router = SimpleRouter()
 router.register(r'item', views.ItemViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'banner', views.BannerViewSet)
+router.register(r'order', views.OrderViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),
-    path("order/", views.OrderView.as_view())
 ]
