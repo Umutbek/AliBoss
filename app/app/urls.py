@@ -43,11 +43,11 @@ swagger_urlpatterns = [
 ]
 
 urlpatterns = [
-   path('admin/', admin.site.urls),
-   path('api/core/', include('core.urls')),
-   path('api/', include('category.urls')),
+   path('aliboss/admin/', admin.site.urls),
+   path('aliboss/api/core/', include('core.urls')),
+   path('aliboss/api/', include('category.urls')),
 
-   path('', include(swagger_urlpatterns)),
+   path('aliboss/', include(swagger_urlpatterns)),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
