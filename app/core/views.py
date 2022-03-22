@@ -28,7 +28,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_class = filters.ItemFilter
 
-    ordering_fields = ('cost',)
+    ordering_fields = ('cost', 'priority')
 
     search_fields = ('name',)
 
@@ -46,6 +46,8 @@ class ServiceViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ServiceSerializer
 
     filter_backends = (SearchFilter, OrderingFilter)
+    ordering_fields = ('cost', 'priority')
+
     search_fields = ('name',)
 
 

@@ -51,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     login = models.CharField(max_length=200, unique=True, verbose_name="Логин")
     address = models.CharField(max_length=200, null=True, verbose_name="Адресс")
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
-
+    avatar = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -83,7 +83,6 @@ class RegularAccount(User):
 
 class Store(User):
     """Model for user"""
-    avatar = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     email = models.EmailField(max_length=200, null=True, blank=True, verbose_name="Почта")
     location = models.CharField(max_length=200, null=True, blank=True)
     slogan = models.CharField(max_length=200, null=True, blank=True, verbose_name="Слоган")
@@ -95,7 +94,7 @@ class Store(User):
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     storecategory = models.ManyToManyField('StoreCategory', verbose_name="Категория магазина")
-
+    priority = models.FloatField(default=0, verbose_name="Приоритет")
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
 
     class Meta:

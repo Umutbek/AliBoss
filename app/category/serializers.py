@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'login', 'phone', 'address')
+        fields = ('id', 'name', 'login', 'phone', 'address', 'avatar')
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class StoreSerializer(serializers.ModelSerializer):
         model = models.Store
         fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address',
                   'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
-                  'slogan', 'description', 'rating', 'storecategory')
+                  'slogan', 'description', 'rating', 'storecategory', 'priority')
 
 
 class RegularAccountSerializer(serializers.ModelSerializer):

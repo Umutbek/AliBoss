@@ -32,8 +32,11 @@ class StoreViewSet(viewsets.ModelViewSet):
     queryset = models.Store.objects.all()
     serializer_class = serializers.StoreSerializer
 
-    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_class = filters.StoreFilter
+
+    ordering_fields = ('priority',)
+
     search_fields = ('name', 'description', 'slogan')
 
     pagination_class = None

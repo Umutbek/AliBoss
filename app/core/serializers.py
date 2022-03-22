@@ -14,7 +14,7 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost', 'costSale', 'issale',
             'supplier', 'uniqueid', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
-            'likes', 'views', 'imagelink', 'isoptovik', 'optovikcost'
+            'likes', 'views', 'imagelink', 'isoptovik', 'optovikcost', 'priority'
             )
 
         read_only_fields = ('id',)
@@ -29,7 +29,7 @@ class GetItemSerializer(serializers.ModelSerializer):
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory',
             'cost', 'costSale', 'issale', 'supplier', 'uniqueid', 'image', 'phone',
             'imagelink', 'instagram', 'facebook', 'whatsapp', 'web', 'likes', 'views', 'isoptovik',
-            'optovikcost'
+            'optovikcost', 'priority'
             )
 
         read_only_fields = ('id',)
@@ -78,7 +78,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'cost', 'costSale', 'issale',
             'supplier', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
-            'likes', 'views', 'imagelink'
+            'likes', 'views', 'imagelink', 'priority'
             )
 
         read_only_fields = ('id',)

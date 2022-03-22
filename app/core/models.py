@@ -32,6 +32,7 @@ class Item(models.Model):
     views = models.IntegerField(default=0, verbose_name="Число просмотров")
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовый товар")
     optovikcost = models.FloatField(default=0, verbose_name="Оптовая цена товара")
+    priority = models.FloatField(default=0, verbose_name="Приоритет")
 
     def __str__(self):
         return self.name
@@ -110,6 +111,7 @@ class Services(models.Model):
     web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
     likes = models.IntegerField(default=0, verbose_name="Число лайков")
     views = models.IntegerField(default=0, verbose_name="Число просмотров")
+    priority = models.FloatField(default=0, verbose_name="Приоритет")
 
     def __str__(self):
         return self.name
