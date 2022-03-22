@@ -41,6 +41,19 @@ class Item(models.Model):
         verbose_name = ("Товар")
         verbose_name_plural = ("Список товаров")
 
+    def save(self, *args, **kwargs):
+        super(Item, self).save(*args, **kwargs)
+
+        print("Image", self.image)
+        try:
+            if self.image:
+                self.imagelink = f"http://176.126.166.63/aliboss/media/{self.image}"
+
+        except:
+            pass
+
+        super(Item, self).save(*args, **kwargs)
+
 
 class ModelOrder(models.Model):
     """Model for orders"""
