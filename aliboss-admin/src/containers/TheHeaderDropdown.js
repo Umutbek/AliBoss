@@ -25,6 +25,8 @@ const TheHeaderDropdown = () => {
     dispatch(logout())
   }, [])
 
+  const avatar = "http://176.126.166.63" + user.avatar
+
   return (
     <CDropdown
       inNav
@@ -35,13 +37,13 @@ const TheHeaderDropdown = () => {
         <div className="c-avatar" style={{ background: '#0288D1', color: '#fff', fontSize: 22 }}>
           { user.avatar ?
             <CImg
-              src={user.avatar}
+              src={avatar}
               className="c-avatar-img"
               alt="user-profile-avatar"
-            /> :  user.username ? user.username[0] : ''
+            /> :  user.login ? user.login[0] : ''
           }
         </div>
-        <div className="ml-3">{ user.username }
+        <div className="ml-3">{ user.login }
           <span className="ml-1">
             <svg width={18} height={18} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlnsXlink="http://www.w3.org/1999/xlink" enableBackground="new 0 0 129 129">
               <g>

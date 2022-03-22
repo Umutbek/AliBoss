@@ -49,9 +49,7 @@ function OrdersList({ status = 'all' }) {
     console.log("User Id", usrId)
     console.log("Doc ID", docId.items)
 
-    const snapshot = await firestore.collection("stores")
-      .doc(usrId.toString())
-      .collection("orders")
+    const snapshot = await firestore.collection("orders")
       .doc(docId.toString())
       .get()
 
@@ -124,10 +122,6 @@ function OrdersList({ status = 'all' }) {
   ]
 
   const getStatusWithBadge = useCallback((statusId) => {
-
-    console.log("Status ID", statusId)
-    console.log("New", statuses.NEW)
-    console.log("packing", statuses.PACKING)
 
     switch (statusId) {
 

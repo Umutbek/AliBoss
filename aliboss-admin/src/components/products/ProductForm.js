@@ -28,6 +28,7 @@ const initialValidationErrors = {
   facebook: null,
   whatsapp: null,
   web: null,
+  priority: null
 }
 
 function ProductForm({ product = null, isEdit = false }) {
@@ -57,7 +58,8 @@ function ProductForm({ product = null, isEdit = false }) {
         facebook: product.facebook,
         whatsapp: product.whatsapp,
         web: product.web,
-        imagelink: product.imagelink
+        imagelink: product.imagelink,
+        priority: product.priority
       })
     }
   }, [product])
@@ -136,7 +138,7 @@ function ProductForm({ product = null, isEdit = false }) {
 
     setIsLoading(true)
 
-    const { name, description, cost, phone, costSale, facebook, instagram, whatsapp, web} = inputs
+    const { name, description, cost, phone, costSale, facebook, instagram, whatsapp, web, priority} = inputs
     const adminName = user.name
 
     // validation
@@ -173,7 +175,8 @@ function ProductForm({ product = null, isEdit = false }) {
       subcategory: selectedSubCategory.value || null,
       subsubcategory: selectedSubSubCategory.value || null,
       cost: cost || null,
-      costSale: 0,
+      costSale: costSale || 0,
+      priority: priority || 0,
       phone: phone || null,
       instagram: instagram || null,
       facebook: facebook || null,
@@ -302,7 +305,7 @@ function ProductForm({ product = null, isEdit = false }) {
                     value={inputs.costSale}
                     onChange={onInputsChange}
                     placeholder="Введите акционную цену товара..."
-                    className={ validationErrors.cost ? 'border-danger' : '' }
+                    className={ validationErrors.costSale ? 'border-danger' : '' }
                   />
                   { validationErrors.costSale && <CFormText><span className="text-danger">{ validationErrors.costSale }</span></CFormText> }
                 </CFormGroup>
@@ -385,6 +388,21 @@ function ProductForm({ product = null, isEdit = false }) {
                   { validationErrors.name && <CFormText><span className="text-danger">{ validationErrors.name }</span></CFormText> }
                 </CFormGroup>
 
+                <CFormGroup>
+                  <CLabel htmlFor="pr-priority">Приоритет товара</CLabel>
+                  <CInput
+                    id="pr-priority"
+                    type="number"
+                    name="priority"
+                    autoComplete="pr-priority"
+                    value={inputs.priority}
+                    onChange={onInputsChange}
+                    placeholder="Введите приоритет товара ..."
+                    className={ validationErrors.name ? 'border-danger' : '' }
+                  />
+                  { validationErrors.name && <CFormText><span className="text-danger">{ validationErrors.name }</span></CFormText> }
+                </CFormGroup>
+
                 <CFormGroup variant="custom-checkbox" inline>
                   <CInputCheckbox custom id="inline-checkbox" name="inline-checkbox" checked={isoptovik} onChange={onIsOptovikChange}/>
                   <CLabel variant="custom-checkbox" htmlFor="inline-checkbox">Оптовый товар?</CLabel>
@@ -452,5 +470,6 @@ const initialInputs = {
   instagram: '',
   facebook: '',
   whatsapp: '',
-  web: ''
+  web: '',
+  priority: ''
 }

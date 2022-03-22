@@ -15,9 +15,8 @@ export const fetchAllOrders = (firestore) => async (dispatch, getState) => {
   console.log('orders in fetchAllOrders: ')
   console.log('User ID', userId)
 
-  return firestore.collection("stores")
-    .doc(userId.toString())
-    .collection("orders")
+  return firestore.collection("orders")
+    .where("store", "==", userId)
     .onSnapshot(async querySnapshot => {
       const docs = []
       querySnapshot.forEach(doc => docs.push({ id: doc.id, ...doc.data() }))
