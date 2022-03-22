@@ -8,6 +8,22 @@ import requests
 from core import imggenerate, firestore
 
 
+class StoreCategory(models.Model):
+    """Model for store categories(types of stores(electronics, etc))"""
+    nameEn = models.CharField(max_length=200, null=True, verbose_name="Название на английском")
+    nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
+    nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
+    icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
+
+    def __str__(self):
+        return self.nameRus
+
+    class Meta:
+        ordering = ('id',)
+        verbose_name = ("Категория магазина")
+        verbose_name_plural = ("Категории магазинов")
+
+
 class UserManager(BaseUserManager):
     """Manager for user profiles"""
 
@@ -78,6 +94,8 @@ class Store(User):
     web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
+    storecategory = models.ManyToManyField('StoreCategory', verbose_name="Категория магазина")
+
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
 
     class Meta:
@@ -88,13 +106,13 @@ class Store(User):
 
 class Category(models.Model):
     """Category model"""
-    nameEn = models.CharField(max_length=200, null=True)
-    nameRus = models.CharField(max_length=200, null=True)
-    nameKg = models.CharField(max_length=200, null=True)
+    nameEn = models.CharField(max_length=200, null=True, verbose_name="Название на английском")
+    nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
+    nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
 
     icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
-    store = models.ManyToManyField('Store', blank=True)
+    store = models.ManyToManyField('Store', blank=True, verbose_name="Магазин")
 
     def __str__(self):
         return self.nameRus
@@ -107,10 +125,10 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     """SubCategory model"""
-    nameEn = models.CharField(max_length=200, null=True)
-    nameRus = models.CharField(max_length=200, null=True)
-    nameKg = models.CharField(max_length=200, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    nameEn = models.CharField(max_length=200, null=True, verbose_name="Название на английском")
+    nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
+    nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, verbose_name="Категория")
 
     def __str__(self):
         return self.nameRus
@@ -123,10 +141,10 @@ class SubCategory(models.Model):
 
 class SubSubCategory(models.Model):
     """SubSubCategory model"""
-    nameEn = models.CharField(max_length=200, null=True)
-    nameRus = models.CharField(max_length=200, null=True)
-    nameKg = models.CharField(max_length=200, null=True)
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
+    nameEn = models.CharField(max_length=200, null=True, verbose_name="Название на английском")
+    nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
+    nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, verbose_name="Подкатегория")
 
     def __str__(self):
         return self.nameRus

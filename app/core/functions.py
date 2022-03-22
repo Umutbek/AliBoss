@@ -30,7 +30,5 @@ def create_order_in_firebase(saved_data):
         u'storeLogo': saved_data.storeLogo, u'status': saved_data.status, u'date': saved_data.date
     }
 
-    firestore.db.collection(u'stores')\
-        .document(str(saved_data.store))\
-        .collection(u'orders').document(
+    firestore.db.collection(u'orders').document(
         str(saved_data.id)).set(data)

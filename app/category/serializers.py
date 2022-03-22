@@ -6,6 +6,15 @@ User = get_user_model()
 from rest_framework.authtoken.models import Token
 
 
+class StoreCategorySerializer(serializers.ModelSerializer):
+    """Serializer for store category"""
+
+    class Meta:
+        model = models.StoreCategory
+        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon')
+        read_only_fields = ('id',)
+
+
 class StoreSerializer(serializers.ModelSerializer):
     """Serializer for stores"""
 
@@ -13,7 +22,7 @@ class StoreSerializer(serializers.ModelSerializer):
         model = models.Store
         fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address',
                   'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
-                  'slogan', 'description', 'rating', )
+                  'slogan', 'description', 'rating', 'storecategory')
 
 
 class RegularAccountSerializer(serializers.ModelSerializer):

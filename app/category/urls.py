@@ -10,6 +10,8 @@ router = SimpleRouter()
 
 router.register(r'store', views.StoreViewSet)
 router.register(r'regularaccount', views.RegularAccountViewSet)
+router.register(r'storecategory', views.StoreCategoryViewSet)
+
 router.register(r'category', views.CategoryViewSet)
 router.register(r'subcategory', views.SubCategoryViewSet)
 router.register(r'subsubcategory', views.SubSubCategoryViewSet)

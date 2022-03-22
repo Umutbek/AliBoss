@@ -17,14 +17,25 @@ from django_filters import DateFilter
 import requests
 
 
+class StoreCategoryViewSet(viewsets.ModelViewSet):
+    """Manage Store Category"""
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.StoreCategory.objects.all()
+    serializer_class = serializers.StoreCategorySerializer
+    pagination_class = None
+
+
 class StoreViewSet(viewsets.ModelViewSet):
     """Manage Store"""
     permission_classes = (permissions.AllowAny,)
     queryset = models.Store.objects.all()
     serializer_class = serializers.StoreSerializer
 
-    filter_backends = (SearchFilter,)
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filter_class = filters.StoreFilter
     search_fields = ('name', 'description', 'slogan')
+
     pagination_class = None
 
 
