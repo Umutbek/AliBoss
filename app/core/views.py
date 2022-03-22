@@ -32,6 +32,9 @@ class ItemViewSet(viewsets.ModelViewSet):
 
     search_fields = ('name',)
 
+    def get_queryset(self):
+        return self.queryset.all().order_by("-priority")
+
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
             return serializers.GetItemSerializer
