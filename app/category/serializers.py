@@ -15,6 +15,14 @@ class StoreCategorySerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
+class UserSerializer(serializers.ModelSerializer):
+    """Serializer for user"""
+
+    class Meta:
+        model = User
+        fields = ('id', 'name', 'login', 'phone', 'address')
+
+
 class StoreSerializer(serializers.ModelSerializer):
     """Serializer for stores"""
 

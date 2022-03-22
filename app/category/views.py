@@ -49,7 +49,7 @@ class RegularAccountViewSet(viewsets.ModelViewSet):
 
 class GetMeView(generics.RetrieveUpdateAPIView):
     """Manage the authenticated user"""
-    serializer_class = serializers.StoreSerializer
+    serializer_class = serializers.UserSerializer
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
