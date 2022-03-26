@@ -29,13 +29,13 @@ class ItemFilter(FilterSet):
 class OrderFilter(FilterSet):
     """Filter for an order"""
     store = filters.CharFilter('store')
+    isoptovik = filters.CharFilter('isoptovik')
     start_date = filters.DateFilter(field_name="date", lookup_expr='gte')
     end_date = filters.DateFilter(field_name="date", lookup_expr='lte')
 
     class Meta:
         models = models.ModelOrder
-        fields = ('store', 'start_date', 'end_date')
-
+        fields = ('store', 'start_date', 'end_date', 'isoptovik')
 
 
 class BannerFilter(FilterSet):
