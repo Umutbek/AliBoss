@@ -21,7 +21,7 @@ class Item(models.Model):
     costSale = models.FloatField(default=0, verbose_name="Акционная цена товара")
     supplier = models.ForeignKey(Store, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Магазин")
     uniqueid = models.CharField(max_length=200, null=True, blank=True, verbose_name="Штрихкод")
-    image = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
+    image = models.ImageField(null=True, blank=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     imagelink = models.TextField(null=True, blank=True, verbose_name="Линк фото товара")
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name="Телефон номер")
     instagram = models.CharField(max_length=200, null=True, blank=True, verbose_name="Инстаграм")

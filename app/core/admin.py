@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import TokenProxy
 from django.utils.translation import gettext as _
 
 from core import models
+from django.utils.html import format_html, mark_safe
 
 
 class CartItemsAdmin(admin.StackedInline):
@@ -24,6 +25,22 @@ class ModelOrderAdmin(admin.ModelAdmin):
 
 
 class ItemAdmin(admin.ModelAdmin):
+
+    def image_tag(self, obj):
+
+
+        if obj.imagelink:
+            return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.imagelink))
+
+        else:
+            return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.image.url))
+
+
+    image_tag.short_description = 'Фото товара'
+    image_tag.allow_tags = True
+
+    list_display = ('name', 'cost', 'image_tag')
+    readonly_fields = ('image_tag',)
 
     search_fields = ('name',)
     list_filter = (
