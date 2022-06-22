@@ -28,13 +28,15 @@ class ItemAdmin(admin.ModelAdmin):
 
     def image_tag(self, obj):
 
+        try:
+            if obj.imagelink:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.imagelink))
 
-        if obj.imagelink:
-            return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.imagelink))
+            else:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.image.url))
 
-        else:
-            return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.image.url))
-
+        except:
+            pass
 
     image_tag.short_description = 'Фото товара'
     image_tag.allow_tags = True
