@@ -94,34 +94,34 @@ class CartItems(models.Model):
         verbose_name_plural = ("Товары")
 
 
-class ServiceCategory(models.Model):
-    class Meta:
-        verbose_name = 'Категория услуги'
-        verbose_name_plural = 'Категории услуг'
-
-    category_title = models.CharField(max_length=100, verbose_name='Навание категории')
-
-    def __str__(self):
-        return self.category_title
-
-
-class ServiceSubCategory(models.Model):
-    class Meta:
-        verbose_name = 'Подкатегория услуги'
-        verbose_name_plural = 'Подкатегории услуг'
-
-    sub_cat_title = models.CharField(max_length=100, verbose_name='Название подкатегории')
-    categories = models.ForeignKey(to=ServiceCategory, on_delete=models.CASCADE, verbose_name='Категория')
-
-    def __str__(self):
-        return self.sub_cat_title
+# class ServiceCategory(models.Model):
+#     class Meta:
+#         verbose_name = 'Категория услуги'
+#         verbose_name_plural = 'Категории услуг'
+#
+#     category_title = models.CharField(max_length=100, verbose_name='Навание категории')
+#
+#     def __str__(self):
+#         return self.category_title
+#
+#
+# class ServiceSubCategory(models.Model):
+#     class Meta:
+#         verbose_name = 'Подкатегория услуги'
+#         verbose_name_plural = 'Подкатегории услуг'
+#
+#     sub_cat_title = models.CharField(max_length=100, verbose_name='Название подкатегории')
+#     categories = models.ForeignKey(to=ServiceCategory, on_delete=models.CASCADE, verbose_name='Категория')
+#
+#     def __str__(self):
+#         return self.sub_cat_title
 
 
 class Services(models.Model):
     """Model for services"""
     name = models.CharField(max_length=500, verbose_name="Название услуги")
-    services_category = models.ForeignKey(to=ServiceCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    services_sub_category = models.ForeignKey(to=ServiceSubCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    # services_category = models.ForeignKey(to=ServiceCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    # services_sub_category = models.ForeignKey(to=ServiceSubCategory, on_delete=models.SET_NULL, null=True, blank=True)
     description = models.TextField(null=True, blank=True, verbose_name="Описание услуги")
     cost = models.FloatField(default=0, verbose_name="Цена услуги")
     costSale = models.FloatField(default=0, verbose_name="Акционная цена услуги")
