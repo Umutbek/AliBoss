@@ -14,6 +14,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('login', 'phone', 'name')
     search_fields = ['login', ]
     list_filter = (
+        'storecategory',
     )
 
     fieldsets = (

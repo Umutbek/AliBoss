@@ -52,6 +52,8 @@ class ItemAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Item, ItemAdmin)
 admin.site.register(models.Services)
+admin.site.register(models.ServiceCategory)
+admin.site.register(models.ServiceSubCategory)
 admin.site.register(models.Banner)
 
 admin.site.register(models.ModelOrder, ModelOrderAdmin)

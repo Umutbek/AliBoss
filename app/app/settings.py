@@ -249,7 +249,6 @@ CORS_ORIGIN_WHITELIST = (
 STATIC_URL = 'aliboss/static-aliboss/'
 MEDIA_URL = 'aliboss/media/'
 
-
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
