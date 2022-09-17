@@ -11,8 +11,8 @@ from category import models
 class UserAdmin(BaseUserAdmin):
 
     ordering = ['id']
-    list_display = ('login', 'phone')
-    search_fields = ['login']
+    list_display = ('login', 'phone', 'name')
+    search_fields = ['login', ]
     list_filter = (
     )
 
@@ -34,6 +34,7 @@ class RegularUserAdmin(admin.ModelAdmin):
     list_filter = (
         ('isoptovik', admin.BooleanFieldListFilter),
     )
+    list_display = ['login', 'name', 'phone']
 
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
