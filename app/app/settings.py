@@ -225,7 +225,7 @@ JAZZMIN_SETTINGS = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru-Ru'
 
 TIME_ZONE = 'Asia/Bishkek'
 

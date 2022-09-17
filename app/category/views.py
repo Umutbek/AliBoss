@@ -82,6 +82,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
+    ordering = ('id',)
 
     filter_backends = (DjangoFilterBackend,)
     filter_class = filters.CategoryFilter

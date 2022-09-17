@@ -62,7 +62,6 @@ class LoginSerializer(serializers.Serializer):
         model: User
         fields = ('login', 'password')
 
-
     def validate(self, data):
         login = data.get('login')
         password = data.get('password')
@@ -97,7 +96,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Category
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon', 'store', 'isoptovik')
+        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon', 'store', 'isoptovik', 'priority')
 
 
 class SubCategorySerializer(serializers.ModelSerializer):

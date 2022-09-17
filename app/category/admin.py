@@ -18,7 +18,8 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
-        (_('Personal info'), {'fields': ('name', 'phone', 'description', 'slogan', 'avatar', 'email', 'address', 'instagram', 'facebook', 'whatsapp', 'web', 'priority')}),
+        (_('Personal info'), {'fields': ('name', 'phone', 'description', 'slogan', 'avatar', 'email', 'address',
+                                         'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'storecategory')}),
     )
     add_fieldsets = (
         (None, {
@@ -42,10 +43,17 @@ class RegularUserAdmin(admin.ModelAdmin):
                                          'optovik_start_date', 'optovik_end_date')}),
     )
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'nameRus']
+    list_display_links = ['id', 'nameRus']
+    ordering = ['-priority', ]
+
+
 # admin.site.register(models.User)
 admin.site.register(models.Store, UserAdmin)
 admin.site.register(models.RegularAccount, RegularUserAdmin)
 admin.site.register(models.StoreCategory)
-admin.site.register(models.Category)
+admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.SubCategory)
 admin.site.register(models.SubSubCategory)

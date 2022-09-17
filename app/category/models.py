@@ -109,6 +109,7 @@ class Category(models.Model):
     nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
     nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
+    priority = models.FloatField(default=0, verbose_name="Приоритет")
 
     icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
     store = models.ManyToManyField('Store', blank=True, verbose_name="Магазин")
