@@ -7,7 +7,6 @@ from django_fsm import FSMIntegerField
 import requests
 from core import imggenerate, utils, firestore
 from category.models import Category, SubCategory, SubSubCategory, User, Store
-from smart_selects.db_fields import ChainedForeignKey
 
 
 class Item(models.Model):
