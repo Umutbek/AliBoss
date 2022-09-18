@@ -9,6 +9,8 @@ app_name = 'core'
 router = SimpleRouter()
 
 router.register(r'item', views.ItemViewSet)
+router.register(r'services_category', views.ServiceCategoryViewSet)
+router.register(r'services_sub_category', views.ServiceSubCategoryViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'banner', views.BannerViewSet)
 router.register(r'order', views.OrderViewSet)

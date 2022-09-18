@@ -70,13 +70,25 @@ class ClientOrderSerializer(serializers.ModelSerializer):
         return order
 
 
+class ServiceCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ServiceCategory
+        fields = '__all__'
+
+
+class ServiceSubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ServiceSubCategory
+        fields = '__all__'
+
+
 class ServiceSerializer(serializers.ModelSerializer):
     """Serializer for Services"""
 
     class Meta:
         model = models.Services
         fields = (
-            'id', 'name', 'description', 'cost', 'costSale', 'issale',
+            'id', 'name', 'description', 'cost', 'costSale', 'issale', 'services_category', 'services_sub_category',
             'supplier', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
             'likes', 'views', 'imagelink', 'priority'
             )

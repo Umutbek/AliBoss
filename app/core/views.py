@@ -41,6 +41,20 @@ class ItemViewSet(viewsets.ModelViewSet):
         return serializers.ItemSerializer
 
 
+class ServiceCategoryViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.ServiceCategory.objects.all()
+    serializer_class = serializers.ServiceCategorySerializer
+
+
+class ServiceSubCategoryViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.ServiceSubCategory.objects.all()
+    serializer_class = serializers.ServiceSubCategorySerializer
+
+
 class ServiceViewSet(viewsets.ModelViewSet):
     """Manage services"""
     authentication_classes = (TokenAuthentication,)
@@ -48,8 +62,9 @@ class ServiceViewSet(viewsets.ModelViewSet):
     queryset = models.Services.objects.all()
     serializer_class = serializers.ServiceSerializer
 
-    filter_backends = (SearchFilter, OrderingFilter)
-    ordering_fields = ('cost', 'priority')
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_class = filters.ServiceFilter
+    ordering_fields = ('cost', 'priority', 'category')
 
     search_fields = ('name',)
 

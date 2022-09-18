@@ -45,3 +45,12 @@ class BannerFilter(FilterSet):
     class Meta:
         models = models.Banner
         fields = ('isoptovik',)
+
+
+class ServiceFilter(FilterSet):
+    category = filters.CharFilter('services_category')
+    sub_category = filters.CharFilter('services_sub_category')
+
+    class Meta:
+        models = models.Services
+        fields = ('services_category', 'services_sub_category')
