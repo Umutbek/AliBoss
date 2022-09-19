@@ -8,10 +8,11 @@ from django.db.models import Q
 class CategoryFilter(FilterSet):
     """Filter for a category"""
     store = filters.CharFilter('store')
+    priority = filters.CharFilter('priority')
 
     class Meta:
         models = models.Category
-        fields = ('store',)
+        fields = ('store', 'priority')
 
 
 class SubCategoryFilter(FilterSet):
