@@ -82,9 +82,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
-    ordering = ('id',)
+    ordering = ('id', 'priority')
+    ordering_fields = ('id', 'priority')
 
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend,SearchFilter, OrderingFilter)
     filter_class = filters.CategoryFilter
     pagination_class = None
 
