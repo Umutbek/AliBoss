@@ -5,13 +5,15 @@ from rest_framework.authtoken.models import TokenProxy
 
 from django.utils.translation import gettext as _
 
+
+from django.utils.html import format_html, mark_safe
 from category import models
 
 
 class UserAdmin(BaseUserAdmin):
 
     ordering = ['id']
-    list_display = ('login', 'phone', 'name')
+    list_display = ('login', 'phone', 'name', 'image_tag')
     search_fields = ['login', ]
     list_filter = (
         'storecategory',
@@ -28,6 +30,21 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('login', 'password1', 'password2')
         }),
     )
+
+    def image_tag(self, obj):
+        try:
+            if obj.avatar:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.avatar.url))
+
+            else:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.avatar.url))
+        except:
+            pass
+
+    image_tag.short_description = 'Фото товара'
+    image_tag.allow_tags = True
+
+    readonly_fields = ('image_tag',)
 
 
 class RegularUserAdmin(admin.ModelAdmin):

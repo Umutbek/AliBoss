@@ -50,8 +50,26 @@ class ItemAdmin(admin.ModelAdmin):
     )
 
 
+class ServicesAdmin(admin.ModelAdmin):
+    def image_tag(self, obj):
+        try:
+            if obj.imagelink:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.imagelink))
+
+            else:
+                return mark_safe('<img src="{}" width="100" height="100" />'.format(obj.image.url))
+        except:
+            pass
+
+    image_tag.short_description = 'Фото товара'
+    image_tag.allow_tags = True
+
+    list_display = ('name', 'image_tag')
+    readonly_fields = ('image_tag',)
+
+
 admin.site.register(models.Item, ItemAdmin)
-admin.site.register(models.Services)
+admin.site.register(models.Services, ServicesAdmin)
 admin.site.register(models.ServiceCategory)
 admin.site.register(models.ServiceSubCategory)
 admin.site.register(models.Banner)
