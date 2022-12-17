@@ -43,7 +43,7 @@ class StoreViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = models.Store.objects.filter(visibility=True)
-        serializer = serializers.StoreSerializer(queryset, many=True)
+        serializer = serializers.StoreSerializer(queryset, many=True, context={"request": request})
         return Response(serializer.data)
 
 
