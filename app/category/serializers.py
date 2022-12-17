@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class StoreSerializer(serializers.ModelSerializer):
     """Serializer for stores"""
+    avatar = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Store
@@ -32,6 +33,10 @@ class StoreSerializer(serializers.ModelSerializer):
                   'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
                   'slogan', 'description', 'rating', 'storecategory', 'priority', 'visibility')
 
+    def get_avatar(self, store):
+        request = self.context.get('request')
+        avatar = store.avatar.url
+        return request.build_absolute_uri(avatar)
 
 class RegularAccountSerializer(serializers.ModelSerializer):
     """Serializer for regular account"""
