@@ -41,6 +41,11 @@ class StoreViewSet(viewsets.ModelViewSet):
 
     pagination_class = None
 
+    def list(self, request, *args, **kwargs):
+        queryset = models.Store.objects.filter(visibility=True)
+        serializer = serializers.StoreSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class RegularAccountViewSet(viewsets.ModelViewSet):
     """Manage Regular Accounts"""

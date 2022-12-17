@@ -96,6 +96,7 @@ class Store(User):
     storecategory = models.ManyToManyField('StoreCategory', verbose_name="Категория магазина")
     priority = models.FloatField(default=0, verbose_name="Приоритет")
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
+    visibility = models.BooleanField(verbose_name="Видимость", default=True)
 
     class Meta:
         ordering = ('-id',)

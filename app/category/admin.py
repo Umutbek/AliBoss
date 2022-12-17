@@ -13,7 +13,7 @@ from category import models
 class UserAdmin(BaseUserAdmin):
 
     ordering = ['id']
-    list_display = ('login', 'phone', 'name', 'image_tag')
+    list_display = ('login', 'phone', 'name', 'visibility', 'image_tag')
     search_fields = ['login', ]
     list_filter = (
         'storecategory',
@@ -22,7 +22,8 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
         (_('Personal info'), {'fields': ('name', 'phone', 'description', 'slogan', 'avatar', 'email', 'address',
-                                         'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'storecategory')}),
+                                         'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'storecategory',
+                                         'visibility')}),
     )
     add_fieldsets = (
         (None, {

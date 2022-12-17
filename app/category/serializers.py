@@ -30,7 +30,7 @@ class StoreSerializer(serializers.ModelSerializer):
         model = models.Store
         fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address',
                   'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
-                  'slogan', 'description', 'rating', 'storecategory', 'priority')
+                  'slogan', 'description', 'rating', 'storecategory', 'priority', 'visibility')
 
 
 class RegularAccountSerializer(serializers.ModelSerializer):
