@@ -42,7 +42,7 @@ class UserAdmin(BaseUserAdmin):
         except:
             pass
 
-    image_tag.short_description = 'Фото товара'
+    image_tag.short_description = 'Логотип'
     image_tag.allow_tags = True
 
     readonly_fields = ('image_tag',)
