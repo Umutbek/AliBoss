@@ -41,9 +41,12 @@ class ItemViewSet(viewsets.ModelViewSet):
         return serializers.ItemSerializer
 
     def list(self, request, *args, **kwargs):
-        queryset = models.Item.objects.select_related('supplier', 'category', 'subcategory', 'subsubcategory').filter(
-            supplier__visibility=True)
-        # queryset = models.Item.objects.filter(supplier__visibility=True)
+        queryset = self.get_queryset().select_related('category', 'subcategory', 'subsubcategory', 'supplier').filter(
+            supplier__visibilty=True)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         serializer = serializers.GetItemSerializer(queryset, many=True)
         return Response(serializer.data)
 
