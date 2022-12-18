@@ -42,8 +42,8 @@ class ItemViewSet(viewsets.ModelViewSet):
 
 #    def list(self, request, *args, **kwargs):
 #        queryset = models.Item.objects.select_related('supplier').filter(supplier__visibility=True)
-        # queryset = models.Item.objects.filter(supplier__visibility=True)
-#        serializer = serializers.ItemSerializer(queryset, many=True)
+#        # queryset = models.Item.objects.filter(supplier__visibility=True)
+#        serializer = serializers.GetItemSerializer(queryset, many=True)
 #        return Response(serializer.data)
 
 
