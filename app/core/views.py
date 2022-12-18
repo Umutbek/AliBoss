@@ -41,10 +41,12 @@ class ItemViewSet(viewsets.ModelViewSet):
         return serializers.ItemSerializer
 
 #    def list(self, request, *args, **kwargs):
-#        queryset = models.Item.objects.select_related('supplier').filter(supplier__visibility=True)
-#        # queryset = models.Item.objects.filter(supplier__visibility=True)
+#        queryset = models.Item.objects.select_related('supplier', 'category', 'subcategory', 'subsubcategory').filter(
+#            supplier__visibility=True)
+        # queryset = models.Item.objects.filter(supplier__visibility=True)
 #        serializer = serializers.GetItemSerializer(queryset, many=True)
 #        return Response(serializer.data)
+#
 
 
 class ServiceCategoryViewSet(viewsets.ModelViewSet):
