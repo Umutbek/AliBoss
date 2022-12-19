@@ -17,6 +17,8 @@ class ItemFilter(FilterSet):
     issale = filters.CharFilter('issale')
     isoptovik = filters.CharFilter('isoptovik')
 
+    supplier__visibility = filters.BooleanFilter('supplier__visibility')
+
     min_cost= filters.CharFilter(field_name="cost",lookup_expr='gte')
     max_cost= filters.CharFilter(field_name="cost",lookup_expr='lte')
 
