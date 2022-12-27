@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, \
 from django_fsm import FSMIntegerField
 import requests
 from core import imggenerate, utils, firestore
-from category.models import Category, SubCategory, SubSubCategory, User, Store
+from category.models import Category, SubCategory, SubSubCategory, User, Store, RegularAccount
 
 
 class Item(models.Model):
@@ -57,6 +57,9 @@ class ModelOrder(models.Model):
     status = FSMIntegerField(choices=utils.OrderStatuses.choices, default=utils.OrderStatuses.New, verbose_name="Статус")
     date = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Дата")
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
+    bonus = models.FloatField(verbose_name='Бонус', default=0)
+    pay_status = models.BooleanField(verbose_name='Статус оплаты', default=False)
+    user_id = models.ForeignKey(to=RegularAccount, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='ID пользователя')
 
     @property
     def items(self):
@@ -156,3 +159,17 @@ class Banner(models.Model):
     class Meta:
         verbose_name = ("Банерная реклама")
         verbose_name_plural = ("Банерные рекламы")
+
+
+class BonusHistory(models.Model):
+    class Meta:
+        verbose_name = ('История изменения бонуса')
+        verbose_name_plural = ('История изменения бонусов')
+
+    date = models.DateTimeField(verbose_name='Дата', auto_now_add=True)
+    amount = models.FloatField(verbose_name='Сумма')
+    user = models.ForeignKey(RegularAccount, on_delete=models.SET_NULL, null=True, blank=True)
+    order = models.ForeignKey(to=ModelOrder, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user.name)

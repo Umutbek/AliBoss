@@ -54,7 +54,7 @@ class ClientOrderSerializer(serializers.ModelSerializer):
         model = models.ModelOrder
         fields = (
             'id', 'items', "store", "totalCost", "user", 'address', 'phone', 'lat', 'lon',
-            'comment', 'storeName', 'storeLogo', 'status', 'date', 'isoptovik'
+            'comment', 'storeName', 'storeLogo', 'status', 'date', 'isoptovik', 'bonus', 'pay_status', 'user_id'
         )
         read_only_fields = ('id',)
 

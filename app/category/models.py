@@ -66,6 +66,8 @@ class RegularAccount(User):
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовик?")
     optovik_start_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата начала работы оптовика")
     optovik_end_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата окончания оптовика")
+    magazin = models.CharField(verbose_name='Магазин', max_length=100, null=True, blank=True)
+    bonus = models.FloatField(verbose_name='Бонус', default=0)
 
     def save(self, *args, **kwargs):
         try:
@@ -97,6 +99,7 @@ class Store(User):
     priority = models.FloatField(default=0, verbose_name="Приоритет")
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
     visibility = models.BooleanField(verbose_name="Видимость", default=True)
+    cashback = models.FloatField(verbose_name='Кэш бэк', default=0)
 
     class Meta:
         ordering = ('-id',)

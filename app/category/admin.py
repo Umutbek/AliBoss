@@ -22,8 +22,8 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
         (_('Personal info'), {'fields': ('name', 'phone', 'description', 'slogan', 'avatar', 'email', 'address',
-                                         'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'storecategory',
-                                         'visibility')}),
+                                         'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'cashback',
+                                         'storecategory', 'visibility')}),
     )
     add_fieldsets = (
         (None, {
@@ -58,7 +58,7 @@ class RegularUserAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
-        (_('Personal info'), {'fields': ('name', 'phone', 'address', 'isoptovik',
+        (_('Personal info'), {'fields': ('name', 'phone', 'address', 'isoptovik', 'bonus', 'magazin',
                                          'optovik_start_date', 'optovik_end_date')}),
     )
 

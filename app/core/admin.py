@@ -19,8 +19,8 @@ class ModelOrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'phone', 'address', 'date', 'status', 'totalCost')
 
     fieldsets = (
-        (_('Информация о заказе'), {'fields': ('store', 'totalCost', 'user', 'address', 'phone',
-                                         'comment', 'storeName', 'storeLogo', 'status')}),
+        (_('Информация о заказе'), {'fields': ('store', 'totalCost', 'user_id', 'bonus', 'address',
+                                               'phone', 'comment', 'storeName', 'storeLogo', 'status', 'pay_status')}),
     )
 
 
@@ -68,11 +68,16 @@ class ServicesAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
 
 
+class BonusHistoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'amount', 'date']
+
+
 admin.site.register(models.Item, ItemAdmin)
 admin.site.register(models.Services, ServicesAdmin)
 admin.site.register(models.ServiceCategory)
 admin.site.register(models.ServiceSubCategory)
 admin.site.register(models.Banner)
+admin.site.register(models.BonusHistory, BonusHistoryAdmin)
 
 admin.site.register(models.ModelOrder, ModelOrderAdmin)
 admin.site.unregister(Group)
