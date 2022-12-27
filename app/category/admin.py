@@ -21,7 +21,7 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('login', 'password')}),
-        (_('Personal info'), {'fields': ('name', 'phone', 'description', 'slogan', 'avatar', 'email', 'address',
+        (_('Personal info'), {'fields': ('name', 'phone', 'description', 'sale_type', 'slogan', 'avatar', 'email', 'address',
                                          'instagram', 'facebook', 'whatsapp', 'web', 'priority', 'cashback',
                                          'storecategory', 'visibility')}),
     )
