@@ -36,7 +36,8 @@ class SubSubCategoryFilter(FilterSet):
 class StoreFilter(FilterSet):
     """Filter for an item"""
     storecategory = filters.CharFilter('storecategory')
+    visibility = filters.CharFilter('visibility')
 
     class Meta:
         models = models.Store
-        fields = ('storecategory',)
+        fields = ('storecategory', 'visibility')

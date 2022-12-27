@@ -41,10 +41,10 @@ class StoreViewSet(viewsets.ModelViewSet):
 
     pagination_class = None
 
-    def list(self, request, *args, **kwargs):
-        queryset = models.Store.objects.filter(visibility=True)
-        serializer = serializers.StoreSerializer(queryset, many=True, context={"request": request})
-        return Response(serializer.data)
+    # def list(self, request, *args, **kwargs):
+    #     queryset = models.Store.objects.filter(visibility=True)
+    #     serializer = serializers.StoreSerializer(queryset, many=True, context={"request": request})
+    #     return Response(serializer.data)
 
 
 class RegularAccountViewSet(viewsets.ModelViewSet):
