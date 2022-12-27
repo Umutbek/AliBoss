@@ -14,7 +14,7 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'description', 'category', 'subcategory', 'subsubcategory', 'cost', 'costSale', 'issale',
             'supplier', 'uniqueid', 'image', 'phone', 'instagram', 'facebook', 'whatsapp', 'web',
-            'likes', 'views', 'imagelink', 'isoptovik', 'optovikcost', 'priority'
+            'likes', 'views', 'imagelink', 'sale_type', 'isoptovik', 'optovikcost', 'priority'
             )
 
         read_only_fields = ('id',)

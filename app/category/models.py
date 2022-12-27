@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, \
 
 from django_fsm import FSMIntegerField
 import requests
+
+from category import utils
 from core import imggenerate, firestore
 
 
@@ -96,6 +98,7 @@ class Store(User):
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     storecategory = models.ManyToManyField('StoreCategory', verbose_name="Категория магазина")
+    sale_type = FSMIntegerField(choices=utils.SaleType.choices, default=utils.SaleType.retail, verbose_name='Тип продажи')
     priority = models.FloatField(default=0, verbose_name="Приоритет")
     rating = models.FloatField(default=5, verbose_name="Рейтинг")
     visibility = models.BooleanField(verbose_name="Видимость", default=True)

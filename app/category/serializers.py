@@ -29,9 +29,9 @@ class StoreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Store
-        fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address',
-                  'location', 'longitude', 'latitude', 'instagram', 'facebook', 'whatsapp', 'web',
-                  'slogan', 'description', 'rating', 'storecategory', 'priority', 'visibility')
+        fields = ('id', 'name', 'login', 'phone', 'avatar', 'email', 'address', 'location', 'longitude', 'latitude',
+                  'instagram', 'facebook', 'whatsapp', 'web', 'slogan', 'description', 'rating', 'storecategory',
+                  'priority', 'sale_type', 'visibility')
 
     def get_avatar(self, store):
         request = self.context.get('request')
@@ -43,8 +43,8 @@ class RegularAccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.RegularAccount
-        fields = ('id', 'name', 'login', 'phone', 'address',
-                  'uid', 'isoptovik', 'optovik_start_date', 'optovik_end_date', 'password')
+        fields = ('id', 'name', 'login', 'phone', 'bonus', 'address',
+                  'uid', 'magazin', 'isoptovik', 'optovik_start_date', 'optovik_end_date', 'password')
 
         extra_kwargs = {'password':{'write_only':True},}
 

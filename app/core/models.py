@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, \
 
 from django_fsm import FSMIntegerField
 import requests
+
+from category.utils import SaleType
 from core import imggenerate, utils, firestore
 from category.models import Category, SubCategory, SubSubCategory, User, Store, RegularAccount
 
@@ -30,6 +32,8 @@ class Item(models.Model):
     web = models.CharField(max_length=200, null=True, blank=True, verbose_name="Веб")
     likes = models.IntegerField(default=0, verbose_name="Число лайков")
     views = models.IntegerField(default=0, verbose_name="Число просмотров")
+    sale_type = FSMIntegerField(choices=SaleType.choices, default=SaleType.retail,
+                                verbose_name='Тип продажи')
     isoptovik = models.BooleanField(default=False, verbose_name="Оптовый товар")
     optovikcost = models.FloatField(default=0, verbose_name="Оптовая цена товара")
     priority = models.FloatField(default=0, verbose_name="Приоритет")
