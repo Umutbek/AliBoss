@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status, permissions, generics, authentication
@@ -9,12 +10,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters import FilterSet
 from rest_framework.authtoken.models import Token
+from django.shortcuts import get_object_or_404
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes, action
 from django_filters import DateFilter
 import requests
+
+from category.models import ModelAgent
 
 
 class StoreCategoryViewSet(viewsets.ModelViewSet):
@@ -24,6 +28,28 @@ class StoreCategoryViewSet(viewsets.ModelViewSet):
     queryset = models.StoreCategory.objects.all()
     serializer_class = serializers.StoreCategorySerializer
     pagination_class = None
+
+
+class ModelAgentViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny, )
+    queryset = models.ModelAgent.objects.all()
+    serializer_class = serializers.ModelAgentSerializer
+
+
+class Modelagentviewset(APIView):
+    serializer_class = serializers.ModelAgentSerializers
+
+    def post(self, request):
+        serializer = serializers.ModelAgentSerializers(data=request.data)
+        # agent = get_object_or_404(ModelAgent, login=request.data['login'])
+        try:
+            agent = models.ModelAgent.objects.get(login=request.data['login'])
+            if agent.pin == request.data['pin']:
+                return Response({'Success': agent.id}, status=200)
+            else:
+                return Response({'ERROR': 'incorrect pin'}, status=403)
+        except ModelAgent.DoesNotExist:
+            raise Http404("ERROR! User with this login was not found")
 
 
 class StoreViewSet(viewsets.ModelViewSet):
@@ -47,7 +73,11 @@ class RegularAccountViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = models.RegularAccount.objects.all()
     serializer_class = serializers.RegularAccountSerializer
-    pagination_class = None
+
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_class = filters.UserFilter
+
+    search_fields = ('name', )
 
 
 class GetMeView(generics.RetrieveUpdateAPIView):

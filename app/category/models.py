@@ -160,3 +160,17 @@ class SubSubCategory(models.Model):
         ordering = ('id',)
         verbose_name = ("Субподкатегория")
         verbose_name_plural = ("Субподгатегории")
+
+
+class ModelAgent(models.Model):
+    class Meta:
+        verbose_name = ('Агент')
+        verbose_name_plural = ('Агенты')
+
+    login = models.CharField(verbose_name='Логин', max_length=100, unique=True)
+    fullName = models.CharField(verbose_name='ФИО', max_length=100)
+    pin = models.CharField(verbose_name='PIN', max_length=100)
+    isActive = models.BooleanField(verbose_name='Статус активности', default=True)
+
+    def __str__(self):
+        return self.fullName

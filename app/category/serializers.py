@@ -2,6 +2,9 @@ from rest_framework import serializers
 from category import models
 from django.contrib.auth import get_user_model, authenticate, password_validation
 from django_filters import rest_framework as filters
+
+from category.models import ModelAgent
+
 User = get_user_model()
 from rest_framework.authtoken.models import Token
 
@@ -21,6 +24,18 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'name', 'login', 'phone', 'address', 'avatar')
+
+
+class ModelAgentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ModelAgent
+        fields = '__all__'
+
+
+class ModelAgentSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = ModelAgent
+        fields = ('login', 'pin')
 
 
 class StoreSerializer(serializers.ModelSerializer):

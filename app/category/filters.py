@@ -41,3 +41,11 @@ class StoreFilter(FilterSet):
     class Meta:
         models = models.Store
         fields = ('storecategory', 'visibility')
+
+
+class UserFilter(FilterSet):
+    name = filters.CharFilter('name')
+
+    class Meta:
+        models = models.RegularAccount
+        fields = ('name', )

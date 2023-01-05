@@ -69,9 +69,14 @@ class CategoryAdmin(admin.ModelAdmin):
     ordering = ['-priority', ]
 
 
+class ModelAgentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'fullName']
+
+
 # admin.site.register(models.User)
 admin.site.register(models.Store, UserAdmin)
 admin.site.register(models.RegularAccount, RegularUserAdmin)
+admin.site.register(models.ModelAgent, ModelAgentAdmin)
 admin.site.register(models.StoreCategory)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.SubCategory)
