@@ -174,3 +174,17 @@ class ModelAgent(models.Model):
 
     def __str__(self):
         return self.fullName
+
+
+class ModelAgentHistory(models.Model):
+    class Meta:
+        verbose_name = ('История агент')
+        verbose_name_plural = ('Истории агента')
+
+    date = models.DateTimeField(verbose_name="Дата и время", auto_now_add=True)
+    agent = models.ForeignKey(to=ModelAgent, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Агент')
+    user = models.ForeignKey(RegularAccount, models.SET_NULL, null=True, blank=True, verbose_name='Пользователь')
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
+
+    def __str__(self):
+        return self.agent.fullName

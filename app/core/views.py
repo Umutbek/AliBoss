@@ -114,3 +114,11 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         functions.create_order_in_firebase(saved_data)
         return Response(serializer.data)
+
+
+class BonusHistoryApi(viewsets.ModelViewSet):
+    """API view for client order list"""
+    queryset = models.BonusHistory.objects.all()
+    serializer_class = serializers.BonusHistorySerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filter_class = filters.BonusHistoryFilter

@@ -14,7 +14,7 @@ router.register(r'services_sub_category', views.ServiceSubCategoryViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'banner', views.BannerViewSet)
 router.register(r'order', views.OrderViewSet)
-
+router.register(r'bonusHistory', views.BonusHistoryApi)
 
 urlpatterns = [
     path('', include(router.urls)),

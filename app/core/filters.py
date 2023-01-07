@@ -49,6 +49,14 @@ class BannerFilter(FilterSet):
         fields = ('isoptovik',)
 
 
+class BonusHistoryFilter(FilterSet):
+    user = filters.CharFilter('user')
+
+    class Meta:
+        models = models.BonusHistory
+        fields = ('user', )
+
+
 class ServiceFilter(FilterSet):
     category = filters.CharFilter('services_category')
     sub_category = filters.CharFilter('services_sub_category')

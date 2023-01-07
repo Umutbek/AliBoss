@@ -106,3 +106,9 @@ class BannerSerializer(serializers.ModelSerializer):
             )
 
         read_only_fields = ('id',)
+
+
+class BonusHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.BonusHistory
+        fields = '__all__'

@@ -174,6 +174,7 @@ class BonusHistory(models.Model):
     amount = models.FloatField(verbose_name='Сумма')
     user = models.ForeignKey(RegularAccount, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(to=ModelOrder, on_delete=models.SET_NULL, null=True, blank=True)
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
 
     def __str__(self):
         return str(self.user.name)
