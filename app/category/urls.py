@@ -16,6 +16,7 @@ router.register(r'agent', views.ModelAgentViewSet)
 router.register(r'category', views.CategoryViewSet)
 router.register(r'subcategory', views.SubCategoryViewSet)
 router.register(r'subsubcategory', views.SubSubCategoryViewSet)
+router.register(r'agentHistory', views.ModelAgentHistoryViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

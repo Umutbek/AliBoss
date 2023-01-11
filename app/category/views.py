@@ -142,3 +142,12 @@ class SubSubCategoryViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filter_class = filters.SubSubCategoryFilter
     pagination_class = None
+
+
+class ModelAgentHistoryViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
+    queryset = models.ModelAgentHistory.objects.all()
+    serializer_class = serializers.ModelAgentHistorySerializer
+
+    filter_backends = (DjangoFilterBackend,)
+    filter_class = filters.ModelAgentFilter

@@ -109,6 +109,8 @@ class BannerSerializer(serializers.ModelSerializer):
 
 
 class BonusHistorySerializer(serializers.ModelSerializer):
+    order = ClientOrderSerializer()
+
     class Meta:
         model = models.BonusHistory
-        fields = '__all__'
+        fields = ('date', 'amount', 'user', 'order', 'description')

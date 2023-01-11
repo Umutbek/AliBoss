@@ -53,6 +53,7 @@ class StoreSerializer(serializers.ModelSerializer):
         avatar = store.avatar.url
         return request.build_absolute_uri(avatar)
 
+
 class RegularAccountSerializer(serializers.ModelSerializer):
     """Serializer for regular account"""
 
@@ -135,3 +136,9 @@ class SubSubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SubSubCategory
         fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'subcategory')
+
+
+class ModelAgentHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ModelAgentHistory
+        fields = ('agent', 'user', 'date', 'description')

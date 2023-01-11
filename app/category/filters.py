@@ -49,3 +49,11 @@ class UserFilter(FilterSet):
     class Meta:
         models = models.RegularAccount
         fields = ('name', )
+
+
+class ModelAgentFilter(FilterSet):
+    agent = filters.CharFilter('agent')
+
+    class Meta:
+        models = models.ModelAgentHistory
+        fields = ('agent', )
