@@ -114,3 +114,9 @@ class BonusHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BonusHistory
         fields = ('date', 'amount', 'user', 'order', 'description')
+
+
+class AddBonusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.RegularAccount
+        fields = ('user', 'bonus')

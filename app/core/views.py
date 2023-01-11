@@ -1,7 +1,10 @@
+from django.http import Http404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status, permissions, generics
 from django.shortcuts import redirect
+
+from category.models import RegularAccount
 from core import models, serializers, filters, functions
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
@@ -122,3 +125,21 @@ class BonusHistoryApi(viewsets.ModelViewSet):
     serializer_class = serializers.BonusHistorySerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_class = filters.BonusHistoryFilter
+
+
+class AddBonusView(APIView):
+    serializer_class = serializers.AddBonusSerializer
+
+    def post(self, request):
+        serializer = serializers.AddBonusSerializer(data=request.data)
+        try:
+            user = models.RegularAccount.objects.get(pk=request.data['user'])
+            bonus = request.data['bonus']
+            user.bonus += int(bonus)
+            user.save()
+            bonusHistory = models.BonusHistory.objects.create(amount=bonus, user=user)
+            bonusHistory.save()
+            return Response({'Success': 'OK!'}, status=209)
+        except RegularAccount.DoesNotExist:
+            raise Http404('ERROR! User with this ID was not found!')
+
