@@ -148,6 +148,8 @@ class SubSubCategorySerializer(serializers.ModelSerializer):
 
 
 class ModelAgentHistorySerializer(serializers.ModelSerializer):
+    user = RegularAccountSerializer()
+
     class Meta:
         model = models.ModelAgentHistory
         fields = ('agent', 'user', 'date', 'description')
