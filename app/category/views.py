@@ -101,7 +101,7 @@ class LoginAPI(APIView):
         user = serializer.validated_data['user']
         print(user)
         info = models.Store.objects.filter(login=user)
-        userdata = serializers.StoreSerializer(info, many=True)
+        userdata = serializers.Storeserializer(info, many=True)
         token, created = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, 'data': userdata.data}, status=200)
 

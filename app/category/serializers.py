@@ -54,6 +54,15 @@ class StoreSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(avatar)
 
 
+class Storeserializer(serializers.ModelSerializer):
+    """Serializer for stores"""
+    class Meta:
+        model = models.Store
+        fields = ('id', 'name', 'login', 'phone', 'email', 'address', 'location', 'longitude', 'latitude',
+                  'instagram', 'facebook', 'whatsapp', 'web', 'slogan', 'description', 'rating', 'storecategory',
+                  'priority', 'sale_type', 'visibility')
+
+
 class RegularAccountSerializer(serializers.ModelSerializer):
     """Serializer for regular account"""
 
