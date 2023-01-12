@@ -153,3 +153,9 @@ class ModelAgentHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ModelAgentHistory
         fields = ('agent', 'user', 'date', 'description')
+
+
+class ModelAgentHistorySerializerGET(serializers.ModelSerializer):
+    class Meta:
+        model = models.ModelAgentHistory
+        fields = ('agent', 'user', 'date', 'description')
