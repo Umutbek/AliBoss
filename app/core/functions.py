@@ -28,7 +28,7 @@ def create_order_in_firebase(saved_data):
         u'user': saved_data.user, u'address': saved_data.address, u'phone': saved_data.phone, u'items': item_list,
         u'lat': saved_data.lat, u'lon': saved_data.lon, u'comment': saved_data.comment, u'storeName': saved_data.storeName,
         u'storeLogo': saved_data.storeLogo, u'status': saved_data.status, u'date': saved_data.date,
-        u'bonus': saved_data.bonus, u'pay_status': saved_data.pay_status
+        u'bonus': saved_data.bonus, u'pay_status': saved_data.pay_status, u'isoptovik': saved_data.isoptovik
     }
 
     firestore.db.collection(u'orders').document(
