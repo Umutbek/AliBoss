@@ -152,9 +152,7 @@ class ModelAgentHistoryViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filter_class = filters.ModelAgentFilter
 
-    def create(self, request, *args, **kwargs):
-        serializer = serializers.ModelAgentHistorySerializer
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return serializers.ModelAgentHistorySerializerGET
+        return serializers.ModelAgentHistorySerializer
