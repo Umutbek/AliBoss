@@ -158,4 +158,4 @@ class ModelAgentHistoryViewSet(viewsets.ModelViewSet):
         return serializers.ModelAgentHistorySerializer
 
     def get_queryset(self):
-        return self.queryset.all().order_by("date")
+        return self.queryset.all().order_by("-date")
