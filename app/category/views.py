@@ -156,3 +156,6 @@ class ModelAgentHistoryViewSet(viewsets.ModelViewSet):
         if self.action == 'list' or self.action == 'retrieve':
             return serializers.ModelAgentHistorySerializerGET
         return serializers.ModelAgentHistorySerializer
+
+    def get_queryset(self):
+        return self.queryset.all().order_by("date")
