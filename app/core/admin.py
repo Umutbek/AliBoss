@@ -16,7 +16,9 @@ class CartItemsAdmin(admin.StackedInline):
 class ModelOrderAdmin(admin.ModelAdmin):
     inlines = [CartItemsAdmin]
 
-    list_display = ('id', 'phone', 'address', 'date', 'status', 'totalCost')
+    list_display = ('id', 'storeName', 'address', 'date', 'status', 'totalCost', 'isoptovik')
+    list_filter = ('isoptovik',)
+    search_fields = ['storeName']
 
     fieldsets = (
         (_('Информация о заказе'), {'fields': ('store', 'totalCost', 'user_id', 'bonus', 'address',

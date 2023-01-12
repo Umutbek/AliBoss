@@ -73,6 +73,11 @@ class ModelAgentAdmin(admin.ModelAdmin):
     list_display = ['id', 'fullName']
 
 
+class ModelAgentHistoryAdmin(admin.ModelAdmin):
+    list_display_links = ['id', 'agent']
+    list_display = ['id', 'agent', 'date', 'description']
+
+
 # admin.site.register(models.User)
 admin.site.register(models.Store, UserAdmin)
 admin.site.register(models.RegularAccount, RegularUserAdmin)
@@ -81,4 +86,4 @@ admin.site.register(models.StoreCategory)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.SubCategory)
 admin.site.register(models.SubSubCategory)
-admin.site.register(models.ModelAgentHistory)
+admin.site.register(models.ModelAgentHistory, ModelAgentHistoryAdmin)
