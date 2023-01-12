@@ -147,7 +147,7 @@ class SubSubCategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'subcategory')
 
 
-class ModelAgentHistorySerializer(serializers.ModelSerializer):
+class ModelAgentHistorySerializerGET(serializers.ModelSerializer):
     user = RegularAccountSerializer()
 
     class Meta:
@@ -155,7 +155,7 @@ class ModelAgentHistorySerializer(serializers.ModelSerializer):
         fields = ('agent', 'user', 'date', 'description')
 
 
-class ModelAgentHistorySerializerGET(serializers.ModelSerializer):
+class ModelAgentHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ModelAgentHistory
         fields = ('agent', 'user', 'date', 'description')
