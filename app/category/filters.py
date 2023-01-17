@@ -45,10 +45,11 @@ class StoreFilter(FilterSet):
 
 class UserFilter(FilterSet):
     name = filters.CharFilter('name')
+    isoptovik = filters.CharFilter('isoptovik')
 
     class Meta:
         models = models.RegularAccount
-        fields = ('name', )
+        fields = ('name', 'isoptovik')
 
 
 class ModelAgentFilter(FilterSet):
