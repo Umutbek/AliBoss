@@ -46,9 +46,45 @@ class CartItemSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
+class CartItemSerializerGet(serializers.ModelSerializer):
+    """Serializer for cart items"""
+    item = GetItemSerializer()
+
+    class Meta:
+        model = models.CartItems
+        fields = (
+            'id', 'item', 'quantity'
+        )
+        read_only_fields = ('id',)
+
+
 class ClientOrderSerializer(serializers.ModelSerializer):
     """Serializer for client order"""
     items = CartItemSerializer(many=True, required=False, allow_null=True)
+
+    class Meta:
+        model = models.ModelOrder
+        fields = (
+            'id', 'items', "store", "totalCost", "user", 'address', 'phone', 'lat', 'lon',
+            'comment', 'storeName', 'storeLogo', 'status', 'date', 'isoptovik', 'bonus', 'pay_status', 'user_id'
+        )
+        read_only_fields = ('id',)
+
+
+    def create(self, validated_data):
+
+        items = validated_data.pop("items", None)
+        order = models.ModelOrder.objects.create(**validated_data)
+
+        if items:
+            for i in items:
+                models.CartItems.objects.create(order=order, **i)
+        return order
+
+
+class ClientOrderSerializerGet(serializers.ModelSerializer):
+    """Serializer for client order"""
+    items = CartItemSerializerGet(many=True, required=False, allow_null=True)
 
     class Meta:
         model = models.ModelOrder

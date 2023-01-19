@@ -92,6 +92,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.queryset.all().order_by("-id")
 
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return serializers.ClientOrderSerializerGet
+        return serializers.ClientOrderSerializer
+
     def create(self, request, *args, **kwargs):
         serializer = serializers.ClientOrderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
