@@ -88,6 +88,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ClientOrderSerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filter_class = filters.OrderFilter
+    search_fields = ('storeName', )
 
     def get_queryset(self):
         return self.queryset.all().order_by("-id")
