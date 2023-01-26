@@ -149,3 +149,13 @@ class AddBonusView(APIView):
         except RegularAccount.DoesNotExist:
             raise Http404('ERROR! User with this ID was not found!')
 
+
+class NotificationApi(APIView):
+    serializer = serializers.NotificationSerializer
+
+    def post(self, request):
+        serializer = serializers.NotificationSerializer(data=request.data)
+        functions.create_notification_in_fire_base(serializer)
+        return Response(serializer.data)
+
+

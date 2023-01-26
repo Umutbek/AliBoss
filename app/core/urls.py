@@ -19,4 +19,5 @@ router.register(r'bonusHistory', views.BonusHistoryApi)
 urlpatterns = [
     path('', include(router.urls)),
     path('add_bonus/', views.AddBonusView.as_view()),
+    path('notification/', views.NotificationApi.as_view()),
 ]

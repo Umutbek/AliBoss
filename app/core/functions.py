@@ -33,3 +33,12 @@ def create_order_in_firebase(saved_data):
 
     firestore.db.collection(u'orders').document(
         str(saved_data.id)).set(data)
+
+
+def create_notification_in_fire_base(saved_data):
+    data = {
+        u'title': saved_data.title, u'desc': saved_data.desc, u'itemId': saved_data.itemId
+    }
+    firestore.db.collection(u'notification').document().add(data)
+
+
