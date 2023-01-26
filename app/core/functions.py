@@ -37,7 +37,7 @@ def create_order_in_firebase(saved_data):
 
 def create_notification_in_fire_base(saved_data):
     data = {
-        u'title': saved_data.title, u'desc': saved_data.desc, u'itemId': saved_data.itemId
+        u'id': saved_data.id, u'title': saved_data.title, u'desc': saved_data.desc, u'itemId': saved_data.itemId
     }
     firestore.db.collection(u'notification').document(saved_data.id).set(data)
 
