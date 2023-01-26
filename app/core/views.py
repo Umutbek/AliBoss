@@ -154,7 +154,9 @@ class NotificationApi(APIView):
     serializer = serializers.NotificationSerializer
 
     def post(self, request):
-        saved_data = request.data
+        serializer = serializers.NotificationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        saved_data = serializer.save()
         functions.create_notification_in_fire_base(saved_data)
         return Response({"success": "ok"}, status=200)
 

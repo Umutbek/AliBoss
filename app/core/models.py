@@ -178,3 +178,12 @@ class BonusHistory(models.Model):
 
     def __str__(self):
         return str(self.user.name)
+
+
+class Notifications(models.Model):
+    desc = models.CharField(verbose_name='Descriptions', max_length=100)
+    title = models.CharField(max_length=100)
+    itemId = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.title)

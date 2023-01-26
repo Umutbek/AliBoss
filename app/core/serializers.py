@@ -158,7 +158,7 @@ class AddBonusSerializer(serializers.ModelSerializer):
         fields = ('user', 'bonus')
 
 
-class NotificationSerializer(serializers.Serializer):
-    title = serializers.CharField(max_length=100)
-    desc = serializers.CharField(max_length=100)
-    itemId = serializers.CharField(max_length=100)
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Notifications
+        fields = '__all__'
