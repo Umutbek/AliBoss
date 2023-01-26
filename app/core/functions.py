@@ -39,6 +39,6 @@ def create_notification_in_fire_base(saved_data):
     data = {
         u'id': str(saved_data.id), u'title': str(saved_data.title), u'desc': str(saved_data.desc), u'itemId': str(saved_data.itemId)
     }
-    firestore.db.collection(u'notification').document().set(data)
+    firestore.db.collection(u'notifications').document().set(data)
 
 
