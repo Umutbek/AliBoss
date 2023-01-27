@@ -124,6 +124,32 @@ class OrderViewSet(viewsets.ModelViewSet):
         functions.create_order_in_firebase(saved_data)
         return Response(serializer.data)
 
+    def update(self, request, *args, **kwargs):
+        serializer = serializers.ClientOrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        saved_data = serializer.save()
+        if request.data['status'] == 4:
+            user_id = serializer.data['user_id']
+            if user_id is not None:
+                user = models.RegularAccount.objects.get(pk=user_id)
+                store = models.Store.objects.get(pk=saved_data.store)
+                if store.cashback != 0 and store.cashback is not None:
+                    bonus = float(saved_data.bonus)
+                    if bonus != 0 and bonus is not None:
+                        user.bonus -= bonus
+                        user.save()
+                        models.BonusHistory.objects.create(user_id=user_id, amount=bonus * -1, order_id=saved_data.id)
+
+                    totalCost = float(request.data['totalCost'])
+                    add_bonus = totalCost * (store.cashback / 100)
+                    user.bonus += add_bonus
+                    user.save()
+                    models.BonusHistory.objects.create(user_id=request.data['user_id'], amount=add_bonus,
+                                                       order_id=saved_data.id)
+
+        functions.create_order_in_firebase(saved_data)
+        return Response(serializer.data)
+
 
 class BonusHistoryApi(viewsets.ModelViewSet):
     """API view for client order list"""
