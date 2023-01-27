@@ -125,30 +125,43 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def update(self, request, *args, **kwargs):
-        serializer = serializers.ClientOrderSerializer(data=request.data)
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = serializers.ClientOrderSerializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-        saved_data = serializer.save()
+        self.perform_update(serializer)
         if request.data['status'] == 4:
             user_id = serializer.data['user_id']
             if user_id is not None:
                 user = models.RegularAccount.objects.get(pk=user_id)
-                store = models.Store.objects.get(pk=saved_data.store)
+                store = models.Store.objects.get(pk=serializer.data['store'])
                 if store.cashback != 0 and store.cashback is not None:
-                    bonus = float(saved_data.bonus)
+                    bonus = float(serializer.data['bonus'])
                     if bonus != 0 and bonus is not None:
                         user.bonus -= bonus
                         user.save()
-                        models.BonusHistory.objects.create(user_id=user_id, amount=bonus * -1, order_id=saved_data.id)
+                        models.BonusHistory.objects.create(user_id=user_id, amount=bonus * -1, order_id=serializer.data['id'])
 
                     totalCost = float(request.data['totalCost'])
                     add_bonus = totalCost * (store.cashback / 100)
                     user.bonus += add_bonus
                     user.save()
                     models.BonusHistory.objects.create(user_id=request.data['user_id'], amount=add_bonus,
-                                                       order_id=saved_data.id)
+                                                       order_id=serializer.data['id'])
 
-        functions.create_order_in_firebase(saved_data)
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
         return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
 
 
 class BonusHistoryApi(viewsets.ModelViewSet):
