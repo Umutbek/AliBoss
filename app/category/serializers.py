@@ -14,7 +14,7 @@ class StoreCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.StoreCategory
-        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'icon')
+        fields = ('id', 'nameEn', 'nameRus', 'nameKg', 'priority', 'icon')
         read_only_fields = ('id',)
 
 
