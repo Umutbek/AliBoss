@@ -186,6 +186,8 @@ class ModelAgentHistory(models.Model):
     agent = models.ForeignKey(to=ModelAgent, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Агент')
     user = models.ForeignKey(RegularAccount, models.SET_NULL, null=True, blank=True, verbose_name='Пользователь')
     description = models.TextField(verbose_name='Описание', null=True, blank=True)
+    type = FSMIntegerField(choices=utils.AgentType.choices, default=utils.AgentType.wholesale,
+                           verbose_name='Тип истории', null=True, blank=True)
 
     def __str__(self):
         return self.agent.fullName

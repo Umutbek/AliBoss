@@ -76,6 +76,9 @@ class ModelAgentAdmin(admin.ModelAdmin):
 class ModelAgentHistoryAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'agent']
     list_display = ['id', 'agent', 'date', 'description']
+    list_filter = (
+        'agent', 'type',
+    )
 
 
 # admin.site.register(models.User)
