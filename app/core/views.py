@@ -130,7 +130,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer = serializers.ClientOrderSerializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
-        if request.data['status'] == 4:
+        if serializer.data['status'] == 4:
             user_id = serializer.data['user_id']
             if user_id is not None:
                 user = models.RegularAccount.objects.get(pk=user_id)
@@ -142,11 +142,11 @@ class OrderViewSet(viewsets.ModelViewSet):
                         user.save()
                         models.BonusHistory.objects.create(user_id=user_id, amount=bonus * -1, order_id=serializer.data['id'])
 
-                    totalCost = float(request.data['totalCost'])
+                    totalCost = float(serializer.data['totalCost'])
                     add_bonus = totalCost * (store.cashback / 100)
                     user.bonus += add_bonus
                     user.save()
-                    models.BonusHistory.objects.create(user_id=request.data['user_id'], amount=add_bonus,
+                    models.BonusHistory.objects.create(user_id=serializer.data['user_id'], amount=add_bonus,
                                                        order_id=serializer.data['id'])
 
         if getattr(instance, '_prefetched_objects_cache', None):
