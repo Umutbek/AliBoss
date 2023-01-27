@@ -34,10 +34,11 @@ class OrderFilter(FilterSet):
     isoptovik = filters.CharFilter('isoptovik')
     start_date = filters.DateFilter(field_name="date", lookup_expr='gte')
     end_date = filters.DateFilter(field_name="date", lookup_expr='lte')
+    user_id = filters.CharFilter('user_id')
 
     class Meta:
         models = models.ModelOrder
-        fields = ('store', 'start_date', 'end_date', 'isoptovik')
+        fields = ('store', 'start_date', 'end_date', 'isoptovik', 'user_id')
 
 
 class BannerFilter(FilterSet):
