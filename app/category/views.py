@@ -29,6 +29,9 @@ class StoreCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.StoreCategorySerializer
     pagination_class = None
 
+    def get_queryset(self):
+        return self.queryset.all().order_by("-priority")
+
 
 class ModelAgentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny, )

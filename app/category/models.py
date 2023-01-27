@@ -16,6 +16,7 @@ class StoreCategory(models.Model):
     nameRus = models.CharField(max_length=200, null=True, verbose_name="Название на русском")
     nameKg = models.CharField(max_length=200, null=True, verbose_name="Название на кыргызком")
     icon = models.ImageField(null=True, upload_to=imggenerate.all_image_file_path, verbose_name="Фото")
+    priority = models.PositiveIntegerField(verbose_name='Приоритет', default=0)
 
     def __str__(self):
         return self.nameRus
